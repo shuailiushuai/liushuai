@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>刘 帅 – 你好, 我是刘帅</title>
+<title>Teaching – 你好, 我是刘帅</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,22 +29,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e408a050e026f53bbd675a0af09bc799.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6204a47da395605cd3a86a550485e2fd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e408a050e026f53bbd675a0af09bc799.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6204a47da395605cd3a86a550485e2fd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,7 +75,93 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-macroeconomics .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-macroeconomics'] = new List('listing-macroeconomics', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-calculus .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-calculus'] = new List('listing-calculus', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +172,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">你好, 我是刘帅</span>
     </a>
   </div>
@@ -94,11 +183,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./teaching/teaching.html"> 
+    <a class="nav-link active" href="../teaching/teaching.html" aria-current="page"> 
 <span class="menu-text">教学</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./research/research.html"> 
+    <a class="nav-link" href="../research/research.html"> 
 <span class="menu-text">研究</span></a>
   </li>  
   <li class="nav-item">
@@ -107,7 +196,7 @@ ul.task-list li input[type="checkbox"] {
     </span>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">个人简介</span></a>
   </li>  
 </ul>
@@ -125,140 +214,102 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-
-
-
-<div class="quarto-about-trestles">
-  <div class="about-entity">
-    <img src="images/shuai.jpg" class="about-image
-  round " style="height: 12em; width: 12em;">
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">刘 帅</h1>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header>
-    <div class="about-links">
-  <a href="mailto:shuailiushuai@gmail.com" class="about-link" rel="" target="">
-    <i class="bi bi-envelope"></i>
-     <span class="about-link-text">Email</span>
-  </a>
-  <a href="https://github.com/shuailiushuai/liushuai" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">GitHub</span>
-  </a>
-</div>
-  </div>
-  <div class="about-contents"><div id="hero-heading">
-<section id="学术简历" class="level2">
-<h2 data-anchor-id="学术简历"><i class="bi bi-file-earmark-person"></i> 学术简历</h2>
-<p>西安交通大学应用经济学博士，现为山西师范大学经济与管理学院讲师。主要从事<strong>数字经济</strong>、<strong>宏观经济</strong>与<strong>计算经济</strong>相关研究。先后在 CSSCI 和 SSCI 来源期刊累计发表中英文学术论文 8 篇。</p>
-</section>
-</div></div>
+<h1 class="title">Teaching</h1>
 </div>
 
-<p><br> <br></p>
-<section id="教育经历" class="level2">
-<h2 data-anchor-id="教育经历"><i class="bi bi-mortarboard"></i> 教育经历</h2>
-<table class="caption-top table">
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="macroeconomics" class="level2">
+<h2 class="anchored" data-anchor-id="macroeconomics">Macroeconomics</h2>
+<div id="listing-macroeconomics" class="quarto-listing quarto-listing-container-table">
+<table class="quarto-listing-table table">
 <thead>
-<tr class="header">
-<th style="text-align: left;">学历</th>
-<th style="text-align: left;">学校</th>
-<th style="text-align: left;">时间</th>
+<tr>
+
+<th>
+Title
+</th>
+
+<th>
+Description
+</th>
+
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>博士</strong> (应用经济学)</td>
-<td style="text-align: left;">西安交通大学</td>
-<td style="text-align: left;">2017.09 - 2023.03</td>
+<tbody class="list">
+
+<tr data-index="0" data-listing-date-sort="1789460065000" data-listing-file-modified-sort="1789460065045" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="51" data-listing-title-sort="Chapter 1" data-listing-filename-sort="chapter1.qmd">
+<td>
+<a href="../teaching/macroeconomics/chapter1.html" class="title listing-title">Chapter 1</a>
+</td>
+<td>
+<span class="listing-description">The Subject Matter</span>
+</td>
+
 </tr>
-<tr class="even">
-<td style="text-align: left;"><strong>硕士</strong></td>
-<td style="text-align: left;">山西师范大学</td>
-<td style="text-align: left;">2014.09 - 2017.07</td>
+
+<tr data-index="1" data-listing-date-sort="1789460065000" data-listing-file-modified-sort="1789460065045" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Chapter2" data-listing-filename-sort="chapter2.qmd">
+<td>
+<a href="../teaching/macroeconomics/chapter2.html" class="title listing-title">Chapter2</a>
+</td>
+<td>
+<span class="listing-description">Public mortality data in Norway</span>
+</td>
+
 </tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>学士</strong></td>
-<td style="text-align: left;">哈尔滨理工大学</td>
-<td style="text-align: left;">2008.09 - 2012.07</td>
-</tr>
+
 </tbody>
 </table>
-<hr>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
 </section>
-<section id="技术能力" class="level2">
-<h2 data-anchor-id="技术能力"><i class="bi bi-cpu"></i> 技术能力</h2>
-<ul>
-<li><strong>编程语言</strong>：<code>Python</code>、<code>Julia</code></li>
-</ul>
-<hr>
-</section>
-<section id="教授课程" class="level2">
-<h2 data-anchor-id="教授课程"><i class="bi bi-easel"></i> 教授课程</h2>
-<table class="caption-top table">
+<section id="calculus" class="level2">
+<h2 class="anchored" data-anchor-id="calculus">calculus</h2>
+<div id="listing-calculus" class="quarto-listing quarto-listing-container-table">
+<table class="quarto-listing-table table">
 <thead>
-<tr class="header">
-<th style="text-align: left;">课程名称</th>
-<th style="text-align: left;">授课对象</th>
-<th style="text-align: left;">课程层次</th>
+<tr>
+
+<th>
+Title
+</th>
+
+<th>
+Description
+</th>
+
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">📐 <strong>高等数学</strong></td>
-<td style="text-align: left;">本科生</td>
-<td style="text-align: left;">公共基础课</td>
+<tbody class="list">
+
+<tr data-index="0" data-categories="ZGF0YQ==" data-listing-date-sort="1666396800000" data-listing-file-modified-sort="1789460065045" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="mortanor" data-listing-filename-sort="chapter1.qmd">
+<td>
+<a href="../teaching/calculus/chapter1.html" class="title listing-title">mortanor</a>
+</td>
+<td>
+<span class="listing-description">Public mortality data in Norway</span>
+</td>
+
 </tr>
-<tr class="even">
-<td style="text-align: left;">📈 <strong>中级宏观经济学</strong></td>
-<td style="text-align: left;">研究生</td>
-<td style="text-align: left;">专业核心课</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">🐍 <strong>数据科学的 Python 基础</strong></td>
-<td style="text-align: left;">研究生</td>
-<td style="text-align: left;">专业前沿课</td>
-</tr>
+
 </tbody>
 </table>
-<hr>
-</section>
-<section id="图书出版" class="level2">
-<h2 data-anchor-id="图书出版"><i class="bi bi-bookmark-star"></i> 图书出版</h2>
-<ul>
-<li><strong>刘帅</strong>. 互联网对中国城市创新产出的影响研究[M]. 北京：经济管理出版社. 2023.11.</li>
-</ul>
-<hr>
-</section>
-<section id="论文发表" class="level2">
-<h2 data-anchor-id="论文发表"><i class="bi bi-journal-text"></i> 论文发表</h2>
-<ul>
-<li><strong>刘帅</strong>, 李琪, 徐晓瑜, 王路瑶. 互联网是否缩小了城市创新差距？——基于面板门槛模型的检验[J]. <em>软科学</em>, 2023, 37(01): 50-57. <strong>[CSSCI]</strong></li>
-<li><strong>刘帅</strong>, 李琪, 徐晓瑜, 吕爽. 互联网发展与城市创新提升——基于“宽带中国”战略的准自然实验[J]. <em>西安交通大学学报(社会科学版)</em>, 2022, 42(06): 10-20. <strong>[CSSCI]</strong></li>
-<li><strong>Liu S</strong>, Xu X-Y, Zhao K, Xiao L-M, Li Q. Understanding the Complexity of Regional Innovation Capacity Dynamics in China: From the Perspective of Hidden Markov Model[J]. <em>Sustainability</em>, 2021, 13(4): 1658. <strong>[SSCI]</strong></li>
-<li><strong>刘帅</strong>, 李琪, 徐晓瑜, 乔志林. 中国创新要素集聚能力的时空格局与动态演化[J]. <em>科技进步与对策</em>, 2021, 38(16): 11-20. <strong>[CSSCI]</strong></li>
-<li><strong>刘帅</strong>, 杜美玲. 制度视角下中美科技成果转移转化政策对比研究[J]. <em>创新科技</em>, 2025, 25(06): 48-63. <strong>[普刊]</strong></li>
-</ul>
-<hr>
-</section>
-<section id="科研项目" class="level2">
-<h2 data-anchor-id="科研项目"><i class="bi bi-diagram-3"></i> 科研项目</h2>
-<ul>
-<li><strong>主持</strong> ｜ 互联网、信息内容与绿色消费发展研究 (2023W070). <em>山西省高等学校哲学社会科学研究项目 (山西省教育厅)</em>. 2023.09 - 至今. [在研·无资助]</li>
-<li><strong>主持</strong> ｜ 制度视角下中美科技成果转移转化政策对比研究 (202304031401069). <em>山西省科技战略研究专项 (山西省科学技术厅)</em>. 2023.12 - 至今. [在研·5万元]</li>
-<li><strong>主持</strong> ｜ 数智化趋势下劳动力市场技能失配的形成、影响与治理 (24YJC790114). <em>教育部人文社会科学研究青年基金项目 (教育部社会科学司)</em>. 2024.09.11 - 至今. [在研·8万元]</li>
-<li><strong>主持</strong> ｜ 数字金融赋能山西省经济高质量发展的机制与路径研究 (2025ZK048). <em>山西省高等学校哲学社会科学研究项目 (山西省哲学社会科学规划办公室)</em>. 2025.08.26 - 至今. [在研·1.5万元]</li>
-</ul>
-<hr>
-</section>
-<section id="兴趣爱好" class="level2">
-<h2 data-anchor-id="兴趣爱好"><i class="bi bi-heart"></i> 兴趣爱好</h2>
-<ul>
-<li><strong>体育运动</strong>：羽毛球 🏸️、游泳 Layout 🏊‍♂️</li>
-</ul>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
 
 
 
@@ -267,6 +318,13 @@ ul.task-list li input[type="checkbox"] {
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     
@@ -666,7 +724,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/shuailiushuai/liushuai/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/shuailiushuai/liushuai/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/shuailiushuai/liushuai/edit/main/teaching/teaching.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/shuailiushuai/liushuai/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

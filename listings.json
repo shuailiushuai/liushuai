@@ -1,0 +1,14 @@
+[
+  {
+    "listing": "/teaching/teaching.html",
+    "items": [
+      "/teaching/macroeconomics/chapter1.html",
+      "/teaching/macroeconomics/chapter2.html",
+      "/teaching/calculus/chapter1.html"
+    ]
+  },
+  {
+    "listing": "/research/research.html",
+    "items": []
+  }
+]
