@@ -1,0 +1,182 @@
+/*-- scss:defaults --*/
+
+$theme-black: #4c4c4c;
+$theme-white: white;
+$theme-grey: #e9ecef;
+
+$theme-purple3: #88398A;
+$theme-purple4: #9d709e;
+$theme-purple5: #562457;
+$theme-purplebrown1: #b996a4;
+$theme-purplebrown2: #7c6c84;
+$theme-darkcoffee1: #570e06;
+$theme-darkcoffee2: #78504b;
+$theme-darkcoffee3: #632e0d;
+$theme-milkcoffee0: #f2ece3;
+$theme-milkcoffee3: #cca79f;
+$theme-milkcoffee2: #b98f68;
+$theme-milkcoffee1: #9e736a;
+$theme-mocha1: #7f2606;
+$theme-mocha2: #9a4c28;
+$theme-mocha3: #b46939;
+$theme-orange: #f9af11;
+$theme-pumpkin: #d05808;
+$theme-darkgreen1: #355E3B;
+$theme-darkgreen2: #445740;
+
+$body-bg: $theme-white;
+$body-color: $theme-darkcoffee1; // text color
+$headings-color: $theme-milkcoffee2; // applies to all 
+$link-color: $theme-mocha3;
+
+// code
+$code-color: $theme-mocha2;
+$code-bg: $theme-milkcoffee0;
+$code-block-bg-alpha: -0.8;
+
+$background-color: $theme-milkcoffee0;
+
+// navigation
+$navbar-bg: $theme-darkgreen1;
+
+// callout block
+$callout-color-note: $theme-darkgreen2;
+$callout-color-tip: $theme-darkgreen1;
+
+// ==========================================
+// 🌐 FONT SETTINGS (CHINESE OPTIMIZED)
+// ==========================================
+
+// Import Noto Sans SC for clean body text and Noto Serif SC for elegant headers
+@import url('https://googleapis.com');
+
+// Universal Cross-Platform Font Fallback Stacks
+$zh-sans-stack: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", sans-serif;
+$zh-serif-stack: "Noto Serif SC", "Source Han Serif CN", "Songti SC", "SimSun", serif;
+$zh-mono-stack: "Fira Code", Consolas, Monaco, "Andale Mono", "Ubuntu Mono", "Microsoft YaHei", monospace;
+
+// Apply the native stacks to Quarto theme variables
+$font-family-sans-serif: $zh-sans-stack;
+$font-family-monospace: $zh-mono-stack;
+
+// Retaining your secondary handles mapped to Chinese font stacks
+$font-poppins: $zh-sans-stack; 
+$font-pt: $zh-serif-stack;      // Headings will use elegant Serif/Songti
+$font-cabin: $zh-sans-stack;
+$font-montserrat: $zh-sans-stack;
+$font-prompt: $zh-sans-stack;
+
+$font-size-root: 16px;
+$line-height-base: 1.75; // Increased line spacing slightly so dense Chinese text is easier to read
+
+/*-- scss:rules --*/
+
+// Headings look much sharper in Chinese when rendered using heavy Serif/Songti
+h1 {
+  color: $theme-darkcoffee3;
+  font-family: $font-pt;
+  font-size: 36px; // Adjusted slightly downward to fit blocky Chinese characters better
+  font-weight: 700;
+}
+
+h2 {
+  color: $theme-darkcoffee3;
+  font-family: $font-pt;
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 1.5rem;
+}
+
+h3, h4 {
+  color: $theme-mocha1;
+  font-family: $zh-sans-stack; // Sub-headings look cleaner in Sans-Serif for Chinese
+  font-weight: 600;
+}
+
+h4 {
+  color: $theme-darkgreen1;
+}
+
+// Adjusting paragraph spacing for better Chinese layout flow
+p {
+  margin-bottom: 1.25rem;
+}
+
+.render-commit-push {
+  padding: 0.5em 0.5em 0em 3em;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background: #f8f8f8 5px center/3em no-repeat;
+  border-top: 1px solid #5B888C;
+  border-bottom: 1px solid #5B888C;
+  background-size: 2em;
+  background-position: 0.5em 0.5em;
+}
+
+.pull {
+  padding: 0.5em 0.5em 0em 3em;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background: #f8f8f8 5px center/3em no-repeat;
+  border-top: 1px solid #E0A890;
+  border-bottom: 1px solid #E0A890;
+  background-size: 1em;
+  background-position: 1em 0.5em;
+}
+
+// Custom tabset styling
+.panel-tabset {
+  .nav-tabs {
+    border-bottom: 2px solid $theme-milkcoffee0;
+    gap: 0.5rem;
+    
+    .nav-link {
+      font-family: $zh-sans-stack; // Swapped to Chinese Sans stack for clean menu tabs
+      font-size: 1rem;
+      font-weight: 500;
+      color: $theme-darkcoffee2 !important;
+      background-color: $theme-milkcoffee0;
+      border: none;
+      border-radius: 8px 8px 0 0;
+      padding: 0.6rem 1.2rem;
+      transition: all 0.2s ease;
+      text-decoration: none !important;
+      
+      &:hover {
+        color: $theme-darkgreen1 !important;
+        background-color: darken($theme-milkcoffee0, 5%);
+        transform: translateY(-2px);
+        text-decoration: none !important;
+      }
+      
+      &.active {
+        color: $theme-white !important;
+        background-color: $theme-darkgreen1;
+        border: none;
+      }
+    }
+  }
+  
+  .tab-content {
+    padding: 1.5rem 0;
+    border-top: none;
+  }
+}
+
+// Override link styling inside tab navigation
+.panel-tabset .nav-tabs .nav-link a,
+.panel-tabset .nav-tabs .nav-item a,
+.panel-tabset .nav-link a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.panel-tabset .nav-tabs .nav-link.active a {
+  color: $theme-white !important;
+}
+
+/* Keep the top of the profile image visible when cropped into a circle */
+.about-entity img.about-image {
+  object-position: top center !important;
+  object-fit: cover !important;
+}

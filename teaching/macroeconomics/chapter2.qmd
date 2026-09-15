@@ -1,0 +1,7 @@
+---
+title: "Chapter2"
+subtitle: "A Framework for Macroeconomics"
+description: "Public mortality data in Norway"
+author: "Liu Shuai"
+date: last-modified
+---

@@ -1,21 +1,37 @@
 project:
   type: website
-
+  output-dir: docs
+  
 website:
-  title: "ls_web"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+  page-navigation: true
+  title: "你好, 我是刘帅"
+  site-url: https://shuailiushuai.github.io/liushuai/
+  repo-url: https://github.com/shuailiushuai/liushuai
+  repo-actions: [edit, issue]
+  
+  page-footer: 
+    left: "&copy; Copyright 2026, Liu Shuai"
+    right: 
+      - icon: github
+        href: https://github.com/shuailiushuai/liushuai
+
+  navbar: 
+    background: "#A9CCE3"
+    search: true
+    right: 
+      - text: "教学"
+        href: teaching/teaching.qmd
+      
+      - text: "研究"
+        href: research/research.qmd
+
+      - text: "博客"
+      #  href: 
+        
+      - text: "个人简介"
+        href: about.qmd
+
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
-    css: styles.css
-    toc: true
-
-
-
+    theme: styles.scss

@@ -1,7 +1,23 @@
 ---
-title: "ls_web"
+title: "刘 帅"
+image: images/shuai.jpg
+about:
+  id: hero-heading
+  template: trestles
+  image-width: 12em
+  image-shape: round
+  links:
+    - icon: mailbox
+      text: shuailiushuai@gmail.com
+      href: mailto:shuailiushuai@gmail.com
+    - icon: github
+      text: GitHub
+      href: https://github.com/shuailiushuai
 ---
 
-This is a Quarto website.
+::: {#hero-heading}
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Hello! 
+
+
+:::

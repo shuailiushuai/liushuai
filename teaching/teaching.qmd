@@ -1,0 +1,37 @@
+---
+title: "Teaching"
+listing:
+  - id: macroeconomics
+    max-description-length: 500
+    image-height: 250px
+    fields: [title, description]
+    contents: 
+      - macroeconomics/*.qmd
+    type: table
+    grid-item-border: false
+    sort-ui: false
+    filter-ui: false
+    
+  - id: calculus
+    max-description-length: 500
+    image-height: 250px
+    fields: [title, description]
+    contents: 
+      - calculus/*.qmd
+    type: table
+    grid-item-border: false
+    sort-ui: false
+    filter-ui: false
+---
+
+
+
+## Macroeconomics
+
+::: {#macroeconomics}
+:::
+
+## calculus
+
+::: {#calculus}
+:::

@@ -1,0 +1,25 @@
+---
+title: "Chapter 1"
+subtitle: "The Subject Matter"
+description: "The Subject Matter"
+author: "Liu Shuai"
+date: last-modified
+---
+
+## The Subject Matter
+
+1. What Is Macroeconomics?
+2. The Great Depression: What Is Going On?
+3. Long-Run Growth
+4. The 1970s: Stagflation and the Lucas Critique
+5. Kydland and Prescott: Quantitative Theory
+6. Waves of Macroeconometrics
+7. Macroeconomics and Inequality
+8. Taxes, Government, and Time Consistency
+9. The Great Recession
+10. Global Interactions
+11. Climate Change and Energy Economics
+12. Where Do We Stand?
+
+
+## 
