@@ -1,5 +1,271 @@
 [
   {
+    "objectID": "research/research.html#calculus",
+    "href": "research/research.html#calculus",
+    "title": "Research",
+    "section": "calculus",
+    "text": "calculus\n\n\n\n\nTitle\nDescription\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter1.html",
+    "href": "teaching/macroeconomics/chapter1.html",
+    "title": "Chapter 1",
+    "section": "",
+    "text": "What Is Macroeconomics?\nThe Great Depression: What Is Going On?\nLong-Run Growth\nThe 1970s: Stagflation and the Lucas Critique\nKydland and Prescott: Quantitative Theory\nWaves of Macroeconometrics\nMacroeconomics and Inequality\nTaxes, Government, and Time Consistency\nThe Great Recession\nGlobal Interactions\nClimate Change and Energy Economics\nWhere Do We Stand?"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter1.html#the-subject-matter",
+    "href": "teaching/macroeconomics/chapter1.html#the-subject-matter",
+    "title": "Chapter 1",
+    "section": "",
+    "text": "What Is Macroeconomics?\nThe Great Depression: What Is Going On?\nLong-Run Growth\nThe 1970s: Stagflation and the Lucas Critique\nKydland and Prescott: Quantitative Theory\nWaves of Macroeconometrics\nMacroeconomics and Inequality\nTaxes, Government, and Time Consistency\nThe Great Recession\nGlobal Interactions\nClimate Change and Energy Economics\nWhere Do We Stand?"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "刘 帅",
+    "section": "",
+    "text": "shuailiushuai@gmail.com\n  \n  \n    \n     GitHub\n  \n\n  \n  \nHello!"
+  },
+  {
+    "objectID": "teaching/teaching.html",
+    "href": "teaching/teaching.html",
+    "title": "Teaching",
+    "section": "",
+    "text": "Title\n\n\n\nDescription\n\n\n\n\n\n\n\n\nChapter 1\n\n\nThe Subject Matter\n\n\n\n\n\n\nChapter 2: A Framework for Macroeconomics\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "teaching/teaching.html#macroeconomics",
+    "href": "teaching/teaching.html#macroeconomics",
+    "title": "Teaching",
+    "section": "",
+    "text": "Title\n\n\n\nDescription\n\n\n\n\n\n\n\n\nChapter 1\n\n\nThe Subject Matter\n\n\n\n\n\n\nChapter 2: A Framework for Macroeconomics\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "teaching/teaching.html#calculus",
+    "href": "teaching/teaching.html#calculus",
+    "title": "Teaching",
+    "section": "calculus",
+    "text": "calculus\n\n\n\n\n\n\nTitle\n\n\n\nDescription\n\n\n\n\n\n\n\n\nmortanor\n\n\nPublic mortality data in Norway\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html",
+    "href": "teaching/macroeconomics/chapter2.html",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "",
+    "text": "Review major macroeconomic time series with focus on long-run behavior\nGradually introduce the basic framework—the neoclassical growth model—that will be the core tool throughout the textbook\n\nEach graph interpreted from this framework’s perspective\nHard to account for data without it\n\nServe as stepping stone into the rest of the text\n\n\n\n\n\n\n\nGoes back to Solow’s growth model, then adds conscious choices (saving, labor supply, technology development)\nMicroeconomic approach: explicit optimization, cross-sectional data\nNo presumption of perfect markets: emphasis on identifying specific frictions\nQuantitative: account for magnitudes, not just qualitative features"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#three-goals-of-this-chapter",
+    "href": "teaching/macroeconomics/chapter2.html#three-goals-of-this-chapter",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "",
+    "text": "Review major macroeconomic time series with focus on long-run behavior\nGradually introduce the basic framework—the neoclassical growth model—that will be the core tool throughout the textbook\n\nEach graph interpreted from this framework’s perspective\nHard to account for data without it\n\nServe as stepping stone into the rest of the text"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#key-features-of-the-framework",
+    "href": "teaching/macroeconomics/chapter2.html#key-features-of-the-framework",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "",
+    "text": "Goes back to Solow’s growth model, then adds conscious choices (saving, labor supply, technology development)\nMicroeconomic approach: explicit optimization, cross-sectional data\nNo presumption of perfect markets: emphasis on identifying specific frictions\nQuantitative: account for magnitudes, not just qualitative features"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#fact-1-output-per-capita-grows-steadily",
+    "href": "teaching/macroeconomics/chapter2.html#fact-1-output-per-capita-grows-steadily",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Fact 1: Output Per Capita Grows Steadily",
+    "text": "Fact 1: Output Per Capita Grows Steadily\nGDP per capita in the US (log scale), 1840–2018\n\n\n\n\n\n\n\nAlmost constant growth over 100+ years (≈ 1.86%/year)\nMajor swings (including the Great Recession) barely visible from bird’s-eye view\n\n\n. . .\n\nGoal: account for output growth by examining the production side—how basic inputs and their prices have evolved."
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#fact-2-capital-output-ratio-is-roughly-constant",
+    "href": "teaching/macroeconomics/chapter2.html#fact-2-capital-output-ratio-is-roughly-constant",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Fact 2: Capital-Output Ratio Is Roughly Constant",
+    "text": "Fact 2: Capital-Output Ratio Is Roughly Constant\nCapital-output ratio in the US, 1929–2022\n\n\n\n\n\n\n\nClear stability at a value of around 3\nJaggedness during the Great Depression, but stable thereafter\nThis had puzzled economists: seemed to suggest a rigid technology with no role for labor\nSolow (1956) showed this constancy is natural in the neoclassical framework"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#wealth-output-ratio",
+    "href": "teaching/macroeconomics/chapter2.html#wealth-output-ratio",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Wealth-Output Ratio",
+    "text": "Wealth-Output Ratio\nWealth-output ratio in the US\n\n\n\n\n\n\n\nBroader interpretation: wealth (includes land, housing)\nAlso shows marked stability, though the level is 4–5 rather than 3\nLarge changes in composition"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#fact-3-return-on-capital-is-roughly-constant",
+    "href": "teaching/macroeconomics/chapter2.html#fact-3-return-on-capital-is-roughly-constant",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Fact 3: Return on Capital Is Roughly Constant",
+    "text": "Fact 3: Return on Capital Is Roughly Constant\nReturn on capital: annualized stock market returns, three periods\n\n\n\n\n\n\n\nUnder competitive markets: stock-market returns ≈ marginal cost of investment = price of capital\nNo strong trend across three long periods\nShort-run fluctuations are large (due to asset valuations), so longer-run averages are more appropriate\n\n\n. . .\nUser cost of capital (Hall and Jorgenson, 1969): interest rate + depreciation + fall in value. Also stationary."
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#fact-4-hours-worked-per-capita-are-roughly-constant-postwar",
+    "href": "teaching/macroeconomics/chapter2.html#fact-4-hours-worked-per-capita-are-roughly-constant-postwar",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Fact 4: Hours Worked Per Capita Are Roughly Constant (Postwar)",
+    "text": "Fact 4: Hours Worked Per Capita Are Roughly Constant (Postwar)\nAverage weekly hours worked in the US (age 14+)\n\n\n\n\n\n\n\nSince the beginning of the 20th century: hours fell from ∼28 to ∼23 hours/week\nSince the end of WWII: hours look stable\n“US hours are stationary” is accurate for the postwar period\nLarge departures during the Great Depression and WWII"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#fact-5-wages-have-risen-at-or-above-output-growth-rate",
+    "href": "teaching/macroeconomics/chapter2.html#fact-5-wages-have-risen-at-or-above-output-growth-rate",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Fact 5: Wages Have Risen at or above Output Growth Rate",
+    "text": "Fact 5: Wages Have Risen at or above Output Growth Rate\nAverage weekly hours worked in US manufacturing, and real wages, 1830–2023\n\n\n\n\n\n\n\nClear downward trend in hours over the long time period\nWages have risen dramatically"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#solows-interpretation",
+    "href": "teaching/macroeconomics/chapter2.html#solows-interpretation",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Solow’s Interpretation",
+    "text": "Solow’s Interpretation\nThe data on capital and output had puzzled economists. Solow (1956) noted:\n\n\nSteady rise in output; equally steady rise in capital; stationary (or declining) hours\nPrice of capital stationary; wages trending upward\nNatural interpretation: labor has become more expensive relative to capital ⇒ firms use less labor relative to capital\nCapital-labor ratio has risen at the rate of output growth\n\n\n. . . center\n\nWhy hasn’t the return to capital fallen?\n\n. . .\nTechnological change directed toward labor (making labor more productive) would increase the value of capital on the margin. But a neoclassical production function (decreasing marginal returns) ensures that as \\(K/L\\) rises, the marginal value of capital falls back.\n. . .\nThese two forces offset, keeping the return to capital stationary."
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#the-aggregate-production-function",
+    "href": "teaching/macroeconomics/chapter2.html#the-aggregate-production-function",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "The Aggregate Production Function",
+    "text": "The Aggregate Production Function\nSolow posited that aggregate output is generated by\n\\[y_t = F_t(k_t, \\ell_t)\\]\n\n\n\\(k_t\\): aggregate capital per capita; \\(\\ell_t\\): hours worked per capita\n\\(F_t\\): production function that may shift over time (technological progress)\nCRS: doubling inputs doubles output\nNeoclassical: decreasing marginal returns to each input\n\n\n. . .\n\n\n\n\n\n\n\nNoteThe Cambridge Capital Controversy (1950s)\n\n\n\nJoan Robinson and Piero Sraffa (Cambridge, UK) vs. Samuelson and Solow (MIT). The question was whether an aggregate production function can exist rigorously when output aggregates many goods. The existence conditions are knife-edge. But the usefulness of the aggregate production function is well established empirically—Cambridge, Mass. “won” on pragmatic grounds.\n\n\n\n\n\n\n\n\n\n\nNoteAside: the Cambridge capital controversy (1950s)\n\n\n\nRobinson & Sraffa (Cambridge, UK) vs. Samuelson & Solow (MIT): can an aggregate production function exist? Rigorously only in knife-edge cases, but it works empirically."
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#solows-growth-accounting-derivation",
+    "href": "teaching/macroeconomics/chapter2.html#solows-growth-accounting-derivation",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Solow’s Growth Accounting: Derivation",
+    "text": "Solow’s Growth Accounting: Derivation\nAssumptions: (i) \\(y_t=F(k_t, \\ell_t, t)\\), CRS, neoclassical; (ii) perfect competition for inputs.\n. . .\nDifferentiating:\n\\[dy = \\frac{\\partial F}{\\partial t}dt + \\frac{\\partial F}{\\partial k}dk + \\frac{\\partial F}{\\partial \\ell}d\\ell\\]\n. . .\nDivide by \\(y\\), use profit maximization (\\(r = \\partial F/\\partial k\\), \\(w = \\partial F/\\partial \\ell\\)), and let \\(\\alpha\\) be capital’s share and \\(1-\\alpha\\) labor’s share (CRS ⇒ zero pure profits):\n. . .\n\n\\[\\frac{dy}{y} = \\underbrace{\\frac{\\partial F}{\\partial t}\\frac{dt}{F}}_{\\text{Solow residual}} + \\alpha \\frac{dk}{k} + (1-\\alpha)\\frac{d\\ell}{\\ell}\\]\nOutput growth = weighted sum of input growth rates + residual."
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#tfp-and-labor-augmenting-technology",
+    "href": "teaching/macroeconomics/chapter2.html#tfp-and-labor-augmenting-technology",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "TFP and Labor-Augmenting Technology",
+    "text": "TFP and Labor-Augmenting Technology\n\n\n\nHicks-neutral (TFP)\n\\(F(k,\\ell,t) = z F(k,\\ell)\\)\n\\[\\frac{dy}{y} = \\frac{dz}{z} + \\alpha \\frac{dk}{k} + (1-\\alpha)\\frac{d\\ell}{\\ell}\\]\n\\(z\\) is total factor productivity: a common factor multiplying both inputs.\n\n\nLabor-augmenting (Harrod-neutral)\n\\(F(k, \\ell, t) = F(k, z\\ell)\\)\n\\[\\frac{dy}{y} = (1-\\alpha)\\frac{dz}{z} + \\alpha \\frac{dk}{k} + (1-\\alpha)\\frac{d\\ell}{\\ell}\\]\nTechnology enters as if it multiplied hours worked.\n\n\n\n. . .\n\nKey result (Uzawa, 1961): for balanced growth in a model with a limited input (labor hours constant), technological change must be labor-augmenting. This is not a choice but a necessity."
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#labor-productivity",
+    "href": "teaching/macroeconomics/chapter2.html#labor-productivity",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Labor Productivity",
+    "text": "Labor Productivity\nLabor productivity in the US, sub-periods\n\n\n\n\n\n\n\nAverage growth rate: a little below 2% per year\nSignificant ups and downs across sub-periods\nCurrently in a “down” period"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#labor-productivity-cross-country",
+    "href": "teaching/macroeconomics/chapter2.html#labor-productivity-cross-country",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Labor Productivity: Cross-Country",
+    "text": "Labor Productivity: Cross-Country\nLabor productivity for a selection of countries (HP-filtered)\n\n\n\n\n\n\n\nStable, positive labor productivity growth across countries\nHovering around 2–2.5% per year\nSimilar patterns across advanced economies"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#total-factor-productivity-us",
+    "href": "teaching/macroeconomics/chapter2.html#total-factor-productivity-us",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Total Factor Productivity: US",
+    "text": "Total Factor Productivity: US\nTFP in the US (two measures)\n\n\n\n\n\n\n\nTFP growth at a little below 2% per year\nSignificant movements up and down"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#total-factor-productivity-cross-country",
+    "href": "teaching/macroeconomics/chapter2.html#total-factor-productivity-cross-country",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Total Factor Productivity: Cross-Country",
+    "text": "Total Factor Productivity: Cross-Country\nHistorical TFP for a broader set of countries (HP-filtered)\n\n\n\n\n\n\n\nSimilar patterns across countries\nSmoothed data shows long-run trends more clearly"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#capital-accumulation",
+    "href": "teaching/macroeconomics/chapter2.html#capital-accumulation",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Capital Accumulation",
+    "text": "Capital Accumulation\nTomorrow’s capital = today’s capital + investment − depreciation:\n\\[k_{t+1} = (1 - \\delta)k_t + i_t\\]\n. . .\nDividing by \\(y_{t+1}\\), and letting \\(\\gamma_t\\) denote the net growth rate of output:\n\\[\\frac{k_{t+1}}{y_{t+1}}(1+\\gamma_t) = (1 - \\delta)\\frac{k_t}{y_t} + \\frac{i_t}{y_t}\\]\n. . .\n\nBalanced growth path: if \\(k\\), \\(i\\), \\(y\\) all grow at constant rate \\(\\gamma\\) with constant saving rate \\(i_t/y_t = s\\),\n\\[\\frac{k}{y} = \\frac{s}{\\gamma + \\delta}\\]\n\n. . .\nNumerical check: \\(\\delta \\approx 0.08\\), \\(\\gamma \\approx 0.02\\), \\(s \\approx 0.30\\) ⇒ \\(k/y = 3\\) ✓"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#the-consumption-output-ratio",
+    "href": "teaching/macroeconomics/chapter2.html#the-consumption-output-ratio",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "The Consumption-Output Ratio",
+    "text": "The Consumption-Output Ratio\nRatio of total consumption to output\n\n\n\n\n\n\n\nLarge movements early in the 20th century\nThereafter: small movements\n\\(1 - c/y \\approx\\) investment-output ratio (net exports ≈ 0 for the US)\nOverall: the assumption of a constant saving rate is a good first approximation"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#the-solow-model-convergence",
+    "href": "teaching/macroeconomics/chapter2.html#the-solow-model-convergence",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "The Solow Model: Convergence",
+    "text": "The Solow Model: Convergence\nSolow’s dynamic system (labor-augmenting technology, constant \\(\\ell\\), constant saving rate \\(s\\)):\n\\[k_{t+1} = sF\\big(k_t, (1+\\gamma)^t \\ell\\big) + (1-\\delta)k_t\\]\n. . .\nVariable transformation: \\(\\tilde{k}_t \\equiv k_t/(1+\\gamma)^t\\) (stationary if \\(k\\) grows at rate \\(\\gamma\\)):\n\\[(1+\\gamma)\\tilde{k}_{t+1}=sF(\\tilde{k}_t, \\ell)+(1-\\delta)\\tilde{k}_t\\]\n. . .\nUnique steady state: \\(\\bar{\\tilde{k}}\\) solves \\((1+\\gamma)\\tilde{k}=sF(\\tilde{k}, \\ell)+(1-\\delta)\\tilde{k}\\)\n. . .\n\nConvergence: under neoclassical conditions, for any initial \\(k_0\\), the economy converges to the balanced growth path.\n\n\n\nWhen \\(k\\) is low: high marginal productivity ⇒ fast accumulation\nWhen \\(k\\) is high: low marginal productivity ⇒ slow accumulation\nThis de-mystifies why \\(k/y \\approx 3\\): deviations are self-correcting"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#from-solow-to-the-workhorse-model",
+    "href": "teaching/macroeconomics/chapter2.html#from-solow-to-the-workhorse-model",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "From Solow to the Workhorse Model",
+    "text": "From Solow to the Workhorse Model\nThe convergence property makes this framework the workhorse model for macroeconomics:\n\n\nBusiness cycles: add stochastic shocks to the dynamic system\nSupply shocks or demand shocks: propagation differs, but all paths eventually return toward balanced growth\nConvergence is ensured by the neoclassical production function\n\n\n. . .\nUnresolved issue: some assumptions are mere mechanical descriptions:\n\n\nInvestment is a constant fraction \\(s\\) of output\nHours worked are constant at \\(\\ell\\)\n\n\n. . .\n\nThese should be the results of conscious choices by households. We need to “rationalize” \\(s\\) and \\(\\ell\\) based on utility maximization."
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#fact-6-factor-shares-are-roughly-constant",
+    "href": "teaching/macroeconomics/chapter2.html#fact-6-factor-shares-are-roughly-constant",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Fact 6: Factor Shares Are Roughly Constant",
+    "text": "Fact 6: Factor Shares Are Roughly Constant\nUS factor shares over time\n\n\n\n\n\n\n\nOn balanced growth: \\(rk\\) grows at the rate of output (\\(r\\) constant, \\(k\\) grows at \\(\\gamma\\)); \\(w\\ell\\) grows at the rate of output (\\(w\\) grows at \\(\\gamma\\), \\(\\ell\\) constant)\nTherefore shares should be constant ⇒ confirmed by the data\nRemarkable constancy over the full sample"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#the-recent-decline-in-the-labor-share",
+    "href": "teaching/macroeconomics/chapter2.html#the-recent-decline-in-the-labor-share",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "The Recent Decline in the Labor Share",
+    "text": "The Recent Decline in the Labor Share\n\n\nLabor share for the US, Japan, France, Germany\n\n\n\n\n\n\n\nGlobal labor share\n\n\n\n\n\n\n\n\n\nRestricting the time interval: noticeable downward trend in recent decades\nObserved in the US, Japan, France, Germany, and globally\nSubject to much scrutiny and research\nFor now: maintain the stylized fact as “close to constant over time”"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#the-cobb-douglas-production-function",
+    "href": "teaching/macroeconomics/chapter2.html#the-cobb-douglas-production-function",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "The Cobb-Douglas Production Function",
+    "text": "The Cobb-Douglas Production Function\nVirtually all applied macro studies use\n\n\\[F(k, \\ell) = Ak^\\alpha \\ell^{1-\\alpha}\\]\n\n\n\n\\(\\alpha\\): constant capital share; \\(1-\\alpha\\): constant labor share\nUnder perfect competition: \\(F_k k/F = \\alpha\\) (independent of \\(k\\) and \\(\\ell\\))\nFactor shares constant regardless of business-cycle position\nAlthough shares are not literally constant, movements are relatively minor\nCobb-Douglas generates a decent approximation, hence its wide use"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#the-seven-stylized-facts",
+    "href": "teaching/macroeconomics/chapter2.html#the-seven-stylized-facts",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "The Seven Stylized Facts",
+    "text": "The Seven Stylized Facts\n\n\nOutput per capita has grown at a roughly constant rate\nThe capital-output ratio has remained roughly constant\nThe consumption-output ratio has been roughly constant\nThe wage rate has grown at a roughly constant rate equal to the growth rate of output\nThe real interest rate has been roughly constant (over longer periods)\nLabor share of output has remained roughly constant\nHours worked per capita have been roughly constant (postwar)\n\n\n. . .\n\nThese facts are consistent with a neoclassical framework: CRS production function with labor-augmenting technical change, decreasing marginal products, constant labor supply, constant depreciation rate, constant saving ratio."
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#time-and-people",
+    "href": "teaching/macroeconomics/chapter2.html#time-and-people",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Time and People",
+    "text": "Time and People\nTime: discrete (mostly) or continuous; infinite horizon (a finite \\(T\\) creates non-stationarity, and \\(T\\) is virtually irrelevant for decisions far from \\(T\\)).\n. . .\nPeople: utility-maximizing agents.\n\n\n“Rationalize” observed choices as optimal given well-defined problems\nAllows welfare statements and normative policy comparisons\nBaseline: representative agent, dynastic (lives forever = cares about offspring)\nAlso common: life-cycle models, overlapping generations, heterogeneous agents"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#the-euler-equation",
+    "href": "teaching/macroeconomics/chapter2.html#the-euler-equation",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "The Euler Equation",
+    "text": "The Euler Equation\nPreferences: time-additive, \\(u(c_t) + \\beta u(c_{t+1})\\)\n\n\nSame \\(u\\) in both periods ⇒ consumption in both periods are normal goods\nConcavity ⇒ consumption smoothing\n\\(\\beta &lt; 1\\): impatience (or probability of death)\n\n\n. . .\nSetting MRS = relative price (gross real interest rate \\(R_{t+1}\\)):\n\\[\\frac{u'(c_t)}{\\beta u'(c_{t+1})}=R_{t+1}\\]\nEquivalently:\n\n\\[u'(c_t) = \\beta R_{t+1}\\, u'(c_{t+1})\\]\n\n. . .\nInterpretation: the marginal utility lost by saving one unit today equals the discounted marginal utility gained from consuming \\(R_{t+1}\\) units tomorrow."
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#balanced-growth-requires-power-utility",
+    "href": "teaching/macroeconomics/chapter2.html#balanced-growth-requires-power-utility",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Balanced Growth Requires Power Utility",
+    "text": "Balanced Growth Requires Power Utility\nKey question: can balanced growth (constant consumption growth, constant \\(R\\)) be consistent with the Euler equation?\n. . .\nResult: balanced growth arises in equilibrium if and only if the utility function is a power function:\n\n\\[u(c) = \\frac{c^{1-\\sigma} - 1}{1-\\sigma}, \\qquad \\sigma &gt; 0\\]\nThe case \\(\\sigma \\to 1\\) yields \\(u(c) = \\log c\\).\n\n. . .\nWhy? With power utility, \\(u'(c_t)/u'\\big((1+\\gamma)c_t\\big)\\) is constant, so a constant \\(R\\) is consistent with constant consumption growth.\n. . .\n“Only if”: for any other \\(u\\), saving rates would go to 0 or 1 over time as the economy grows. Balanced growth as observed in the data would not be possible.\n. . .\n⇒ Power utility (CRRA) is used in almost all applications."
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#labor-vs.-leisure",
+    "href": "teaching/macroeconomics/chapter2.html#labor-vs.-leisure",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Labor vs. Leisure",
+    "text": "Labor vs. Leisure\nAdd leisure to utility: \\(u(c, 1-\\ell)\\), with leisure \\(1-\\ell\\).\n. . .\nMRS = wage:\n\\[\\frac{u_\\ell(c_t, 1-\\ell_t)}{u_c(c_t, 1-\\ell_t)} = w_t\\]\n. . .\nRequirement: constant hours along a balanced growth path where \\(c\\) and \\(w\\) grow at rate \\(\\gamma\\).\n. . .\nResult: balanced growth with constant hours if and only if\n\n\\[u(c, 1-\\ell) = \\frac{\\big(c \\cdot v(1-\\ell)\\big)^{1-\\sigma} - 1}{1-\\sigma}\\]\nwhere \\(v(\\cdot)\\) is strictly increasing and \\(c \\cdot v(1-\\ell)\\) is strictly quasiconcave.\n\n. . .\nIntuition: at higher wages, the substitution effect (work more) cancels the income effect (enjoy more leisure)."
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#allowing-for-declining-hours",
+    "href": "teaching/macroeconomics/chapter2.html#allowing-for-declining-hours",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Allowing for Declining Hours",
+    "text": "Allowing for Declining Hours\nThe longer-run data (and cross-country evidence) suggest hours fall slowly (∼1/3 % per year).\n. . .\nResult: balanced growth with hours declining at a constant rate if and only if\n\n\\[u(c, 1-\\ell) = \\frac{\\big(c^{1-\\nu} g(c^{\\nu}\\ell)\\big)^{1-\\sigma} - 1}{1-\\sigma}\\]\nwith \\(\\nu &gt; 0\\) and \\(g(\\cdot)\\) decreasing.\n\n\n\nHours grow at \\((1 + \\gamma)^{-\\nu}\\); consumption at \\((1 + \\gamma)^{1-\\nu}\\)\n\\(\\nu = 0\\): collapses to the constant-hours case\n\\(\\nu &gt; 0\\): income effect slightly dominates the substitution effect\nInterpretation: at lower income, people work more because consumption is more important"
+  },
+  {
+    "objectID": "teaching/macroeconomics/chapter2.html#key-takeaways",
+    "href": "teaching/macroeconomics/chapter2.html#key-takeaways",
+    "title": "Chapter 2: A Framework for Macroeconomics",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\n\nThe Kaldor facts (constant growth rate, constant \\(k/y\\), constant \\(c/y\\), rising wages, stable \\(r\\), stable factor shares, stable hours) motivate the neoclassical growth framework\nGrowth accounting: the Solow residual is the dominant source of growth\nConvergence: the neoclassical production function ensures the economy returns to its balanced growth path\nCRRA utility is the unique preference specification consistent with balanced growth (constant saving rate, constant or slowly declining hours)\nThe Euler equation is the central optimality condition connecting consumption, saving, and interest rates\nThe recent decline in the labor share is an active area of research and a departure from the classic Kaldor facts"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "刘 帅",
@@ -61,54 +327,5 @@
     "title": "刘 帅",
     "section": " 兴趣爱好",
     "text": "兴趣爱好\n\n体育运动：羽毛球 🏸️、游泳 Layout 🏊‍♂️"
-  },
-  {
-    "objectID": "teaching/teaching.html",
-    "href": "teaching/teaching.html",
-    "title": "Teaching",
-    "section": "",
-    "text": "Title\n\n\n\nDescription\n\n\n\n\n\n\n\n\nChapter 1\n\n\nThe Subject Matter\n\n\n\n\n\n\nChapter2\n\n\nPublic mortality data in Norway\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "teaching/teaching.html#macroeconomics",
-    "href": "teaching/teaching.html#macroeconomics",
-    "title": "Teaching",
-    "section": "",
-    "text": "Title\n\n\n\nDescription\n\n\n\n\n\n\n\n\nChapter 1\n\n\nThe Subject Matter\n\n\n\n\n\n\nChapter2\n\n\nPublic mortality data in Norway\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "teaching/teaching.html#calculus",
-    "href": "teaching/teaching.html#calculus",
-    "title": "Teaching",
-    "section": "calculus",
-    "text": "calculus\n\n\n\n\n\n\nTitle\n\n\n\nDescription\n\n\n\n\n\n\n\n\nmortanor\n\n\nPublic mortality data in Norway\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "刘 帅",
-    "section": "",
-    "text": "shuailiushuai@gmail.com\n  \n  \n    \n     GitHub\n  \n\n  \n  \nHello!"
-  },
-  {
-    "objectID": "research/research.html#calculus",
-    "href": "research/research.html#calculus",
-    "title": "Research",
-    "section": "calculus",
-    "text": "calculus\n\n\n\n\nTitle\nDescription\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "teaching/macroeconomics/chapter1.html",
-    "href": "teaching/macroeconomics/chapter1.html",
-    "title": "Chapter 1",
-    "section": "",
-    "text": "What Is Macroeconomics?\nThe Great Depression: What Is Going On?\nLong-Run Growth\nThe 1970s: Stagflation and the Lucas Critique\nKydland and Prescott: Quantitative Theory\nWaves of Macroeconometrics\nMacroeconomics and Inequality\nTaxes, Government, and Time Consistency\nThe Great Recession\nGlobal Interactions\nClimate Change and Energy Economics\nWhere Do We Stand?"
-  },
-  {
-    "objectID": "teaching/macroeconomics/chapter1.html#the-subject-matter",
-    "href": "teaching/macroeconomics/chapter1.html#the-subject-matter",
-    "title": "Chapter 1",
-    "section": "",
-    "text": "What Is Macroeconomics?\nThe Great Depression: What Is Going On?\nLong-Run Growth\nThe 1970s: Stagflation and the Lucas Critique\nKydland and Prescott: Quantitative Theory\nWaves of Macroeconometrics\nMacroeconomics and Inequality\nTaxes, Government, and Time Consistency\nThe Great Recession\nGlobal Interactions\nClimate Change and Energy Economics\nWhere Do We Stand?"
   }
 ]
