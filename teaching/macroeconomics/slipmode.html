@@ -1,0 +1,1135 @@
+<!--
+  slipmode.html  v5 —— Quarto HTML 讲义的 slipst 式「全屏滑动演示」
+  用法（样式+脚本都在本文件，放在 .qmd 旁边）：
+
+    format:
+      html:
+        embed-resources: true
+        include-after-body: slipmode.html
+
+  ═══════════════ 写法速查 ═══════════════
+  自动分页（不用写任何标记）
+    · 标题页单独一页：标题、副标题、作者、单位、日期，右下角附本讲大纲
+    · 每个 #  一级标题：单独一张章节页（PART 01 标签 + 大标题 + 背景淡色大编号）
+    · 每个 ## 二级标题：自动停顿，并滑到屏幕顶部
+
+  停顿：单独一行写
+    . . .                 停顿；新内容超出屏幕底部时自动下滑到刚好看得见
+    . . . up              停顿，新内容滑到屏幕顶部
+    . . . center          停顿，新内容滑到屏幕中央
+    . . . stay            停顿，不滚动
+    . . . up #fig-gdp     停顿，把指定元素（#id）滑到顶部
+    . . . up -2em         再加偏移（em / px / vh；负数表示多留点上方空间）
+  写在列表项里（缩进对齐）可以让列表逐条出现。
+
+  标题上的属性（覆盖 ## 的默认行为，也可用于 ###）
+    ## 标题 {.stay}  停顿不滚动     ## 标题 {.center}  停顿并居中
+    ## 标题 {.pause} 普通停顿       ## 标题 {.nobreak} 不停顿，跟前文一起出现
+
+  内容块与行内样式
+    ::: incremental       列表逐条出现（和 revealjs 的写法相同，可直接沿用）
+    ::: replace           块内每个元素依次在原地替换（同一张图逐步演变）
+    ::: slide-only        只在演示时显示
+    ::: web-only          只在网页阅读时显示（演示时跳过）
+    ::: key               重点框
+    [文字]{.hl}           荧光笔（琥珀色）；还有 {.hl .blue} {.hl .red} {.hl .green}
+    [文字]{.ul}           手绘感下划线
+
+  ═══════════════ 演示操作（演示中按 ? 查看） ═══════════════
+    右下角播放按钮 / F / F11   进入；Esc 或 F 退出
+    → ↓ 空格 PgDn 回车    下一步          ← ↑ PgUp Backspace   上一步
+    Home / End            第一步 / 最后一步     数字 + 回车   跳到第 n 步
+    O                     目录：点击跳到任意章节
+    W                     批注笔（Z 撤销，C 清空）
+    L                     激光笔          D   聚焦模式（已讲内容变淡）
+    B 或 .                黑屏（翻页笔的黑屏键）
+-->
+<style>
+:root {
+  /* 配色 —— 改这里即可换整体风格 */
+  --slip-paper:  #ffffff;
+  --slip-ink:    #18212b;
+  --slip-muted:  #5e6b78;
+  --slip-faint:  #9aa5b1;
+  --slip-rule:   #dce1e7;
+  --slip-accent: #1f5aa6;
+  --slip-tint:   #edf3fa;
+  --slip-marker: #ffc93c;
+  --slip-pen:    #e0453a;
+
+  --slip-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Cambria, Georgia,
+                "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", serif;
+  --slip-sans:  "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial,
+                "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+
+  --slip-font:  clamp(22px, 1.75vw, 38px);     /* 演示时正文字号 */
+  --slip-width: 46em;                          /* 演示时正文最大宽度（随字号缩放） */
+  --slip-fade:  .4s;
+}
+
+/* ═════════════ 任何模式都生效 ═════════════ */
+.slip-marker {
+  display: block !important; height: 0 !important; min-height: 0 !important;
+  margin: 0 !important; padding: 0 !important; border: 0 !important;
+  overflow: hidden !important; visibility: hidden !important;
+}
+html:not(.slip-mode) .slide-only,
+html:not(.slip-mode) .slip-roadmap,
+html:not(.slip-mode) .slip-ink { display: none !important; }
+html.slip-mode .web-only { display: none !important; }
+
+/* 荧光笔：两端收窄、略微倾斜的笔触，换行时每行独立成笔 */
+.hl {
+  --hl: var(--slip-marker);
+  background-image: linear-gradient(100deg,
+      transparent 0, transparent .12em,
+      color-mix(in srgb, var(--hl) 62%, transparent) .3em,
+      color-mix(in srgb, var(--hl) 50%, transparent) 55%,
+      color-mix(in srgb, var(--hl) 66%, transparent) calc(100% - .3em),
+      transparent calc(100% - .1em));
+  background-repeat: no-repeat; background-size: 100% .72em; background-position: 0 88%;
+  padding: 0 .18em; margin: 0 -.06em; border-radius: .12em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.hl.blue  { --hl: #7fb2ff; }
+.hl.red   { --hl: #ff8a80; }
+.hl.green { --hl: #8be0a4; }
+/* 手绘下划线 */
+.ul {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M1 5.5C20 3 38 2.4 60 3.6S100 6.2 119 3.2' fill='none' stroke='%23e0453a' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E")
+              no-repeat 0 100% / 100% .32em;
+  padding-bottom: .12em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+div.key {
+  background: var(--slip-tint); border-left: 3px solid var(--slip-accent);
+  padding: .75em 1.1em; margin: 1em 0; border-radius: 0 6px 6px 0;
+}
+div.key > :last-child { margin-bottom: 0; }
+
+/* ───── Play 按钮：只有图标的圆形按钮 ───── */
+.slip-play {
+  position: fixed; right: 1.4rem; bottom: 1.4rem; z-index: 1050;
+  width: 2.4rem; height: 2.4rem; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center; color: #fff; background: var(--slip-accent);
+  box-shadow: 0 2px 4px rgba(24,33,43,.12), 0 10px 26px color-mix(in srgb, var(--slip-accent) 35%, transparent);
+  opacity: .9; transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
+}
+.slip-play:hover { opacity: 1; transform: scale(1.07);
+  box-shadow: 0 3px 6px rgba(24,33,43,.14), 0 14px 32px color-mix(in srgb, var(--slip-accent) 45%, transparent); }
+.slip-play:focus-visible { outline: 2px solid var(--slip-accent); outline-offset: 3px; }
+.slip-play svg { width: .72rem; height: .72rem; margin-left: 2px; }
+@media print { .slip-play, .slip-hud, .slip-overlay, .slip-laser, .slip-head { display: none !important; } }
+
+/* ═════════════ 演示模式：框架 ═════════════ */
+html.slip-mode, html.slip-mode body { background: var(--slip-paper); }
+html.slip-mode { scrollbar-width: none; scroll-behavior: auto !important; }
+html.slip-mode::-webkit-scrollbar { display: none; }
+
+html.slip-mode #quarto-header, html.slip-mode #quarto-sidebar,
+html.slip-mode #quarto-margin-sidebar, html.slip-mode #TOC,
+html.slip-mode .quarto-page-breadcrumbs, html.slip-mode #quarto-back-to-top,
+html.slip-mode .quarto-alternate-formats, html.slip-mode .anchorjs-link,
+html.slip-mode .slip-play { display: none !important; }
+
+html.slip-mode #quarto-content { display: block !important; padding: 0 !important; margin: 0 !important; }
+html.slip-mode main.content {
+  display: block !important; position: relative; max-width: var(--slip-width);
+  margin: 0 auto !important; padding: 0 3rem 100vh !important;
+  font-family: var(--slip-sans); font-size: var(--slip-font); line-height: 1.58;
+  color: var(--slip-ink); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+
+/* 章节名：左下角，与控件栏同一水平线，不遮挡内容 */
+.slip-head { display: none; }
+html.slip-mode .slip-head {
+  display: block; position: fixed; left: 1.3rem; bottom: 1.15rem; z-index: 1500; pointer-events: none;
+  max-width: 40vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: 500 clamp(12px, .8vw, 17px)/1 var(--slip-sans); color: var(--slip-muted); letter-spacing: .01em;
+  padding: .35em .6em .35em 0; background: var(--slip-paper); border-radius: 0 6px 6px 0;
+  transition: opacity .3s ease;
+}
+html.slip-mode .slip-head b { font-family: var(--slip-serif); font-weight: 600; color: var(--slip-accent); margin-right: .6em; }
+html.slip-mode .slip-head.off { opacity: 0; }
+
+/* ───── 文字 ───── */
+html.slip-mode main.content p, html.slip-mode main.content li { max-width: 38em; }
+html.slip-mode main.content p { margin: 0 0 .7em; }
+html.slip-mode main.content strong { font-weight: 700; color: var(--slip-ink); }
+html.slip-mode main.content a { color: var(--slip-accent); text-decoration-thickness: .06em; text-underline-offset: .18em; }
+
+html.slip-mode main.content h2 {
+  font-family: var(--slip-serif); font-size: 1.6em; font-weight: 600; line-height: 1.2; letter-spacing: -.005em;
+  color: var(--slip-ink); text-wrap: balance; margin: 1.5em 0 .85em; padding: 0 0 .32em; border: 0;
+  background: linear-gradient(var(--slip-accent), var(--slip-accent)) 0 100% / 1.6em 3px no-repeat,
+              linear-gradient(var(--slip-rule), var(--slip-rule)) 0 100% / 100% 1px no-repeat;
+}
+html.slip-mode main.content h3 { font-family: var(--slip-serif); font-size: 1.18em; font-weight: 600; color: var(--slip-accent); margin: 1.1em 0 .45em; }
+
+/* 列表 */
+html.slip-mode main.content ul, html.slip-mode main.content ol { padding-left: 1.4em; margin: 0 0 .8em; }
+html.slip-mode main.content li { margin: .4em 0; }
+html.slip-mode main.content li > p { margin: 0; }
+html.slip-mode main.content ul > li { list-style: none; position: relative; }
+html.slip-mode main.content ul > li::before {
+  content: ""; position: absolute; left: -1em; top: .64em; width: .34em; height: .34em;
+  border-radius: 50%; background: var(--slip-accent);
+}
+html.slip-mode main.content li ul { font-size: .88em; color: var(--slip-muted); margin: .15em 0 .2em; }
+html.slip-mode main.content li ul > li::before { width: .55em; height: 1.5px; border-radius: 1px; top: .78em; background: var(--slip-faint); }
+html.slip-mode main.content ol { counter-reset: slipol; }
+html.slip-mode main.content ol > li { list-style: none; position: relative; counter-increment: slipol; }
+html.slip-mode main.content ol > li::before {
+  content: counter(slipol); position: absolute; left: -1.4em; top: -.06em; width: 1em; text-align: right;
+  font: 600 1.12em/1.5 var(--slip-serif); color: var(--slip-accent);
+}
+
+/* 图、表、公式、callout */
+html.slip-mode main.content img { max-height: 64vh; object-fit: contain; }
+html.slip-mode main.content .quarto-figure, html.slip-mode main.content figure { margin: .3em 0 .9em; }
+html.slip-mode main.content :is(figcaption, .figure-caption) {
+  font-size: .6em; color: var(--slip-muted); text-align: center; margin-top: .4em;
+}
+html.slip-mode main.content table {
+  --bs-table-border-color: transparent; font-size: .82em; margin: .5em 0 1.1em; width: auto; min-width: 60%;
+  border-collapse: collapse; border-top: 2px solid var(--slip-ink); border-bottom: 2px solid var(--slip-ink);
+  font-variant-numeric: tabular-nums;
+}
+html.slip-mode main.content table :is(th, td) { border: 0 !important; padding: .42em 1.4em .42em 0; background: transparent !important; box-shadow: none !important; }
+html.slip-mode main.content table thead th { border-bottom: 1px solid var(--slip-ink) !important; font-weight: 600; }
+html.slip-mode main.content table tbody tr:first-child td { padding-top: .6em; }
+html.slip-mode main.content table tbody tr:last-child td { padding-bottom: .6em; }
+html.slip-mode main.content .math.display, html.slip-mode main.content mjx-container[display="true"] { margin: .6em 0 !important; }
+
+html.slip-mode main.content .callout {
+  font-size: .86em; margin: 1em 0; border: 0 !important; border-left: 3px solid var(--slip-accent) !important;
+  border-radius: 0 6px 6px 0 !important; box-shadow: none !important; background: var(--slip-tint) !important;
+}
+html.slip-mode main.content .callout-important, html.slip-mode main.content .callout-warning,
+html.slip-mode main.content .callout-caution { border-left-color: var(--slip-pen) !important;
+  background: color-mix(in srgb, var(--slip-pen) 7%, var(--slip-paper)) !important; }
+html.slip-mode main.content .callout-tip { border-left-color: #2f8f5b !important;
+  background: color-mix(in srgb, #2f8f5b 7%, var(--slip-paper)) !important; }
+html.slip-mode main.content .callout :is(.callout-header, .callout-title-container, .callout-body, .callout-body-container, p) { font-size: inherit; }
+html.slip-mode main.content .callout .callout-header { background: transparent !important; border: 0 !important; padding: .55em 1em 0 !important; }
+html.slip-mode main.content .callout .callout-title-container { font-weight: 700; }
+html.slip-mode main.content .callout .callout-body-container, html.slip-mode main.content .callout .callout-body { padding: .2em 1em .6em !important; }
+html.slip-mode main.content .callout .callout-icon-container { display: none; }
+html.slip-mode main.content .callout p { max-width: none; }
+html.slip-mode main.content code { font-size: .85em; }
+
+/* ───── 标题页 ─────
+   ┌────────────────────────────────────────────┐
+   │ 大标题（占满整行）                           │
+   │ 副标题                                      │
+   │ ──                                          │
+   │ 作者                         │ 1 第一章      │
+   │ 单位                         │ 2 第二章      │
+   │ 日期                         │ 3 第三章      │
+   └────────────────────────────────────────────┘ */
+html.slip-mode #title-block-header {
+  min-height: 100vh; margin: 0 !important; display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto auto auto;
+  column-gap: 3em; align-content: center;
+}
+html.slip-mode #title-block-header > * { grid-column: 1; }
+html.slip-mode #title-block-header > .quarto-title { grid-column: 1 / -1; grid-row: 1; }
+html.slip-mode #title-block-header .title {
+  font-family: var(--slip-serif); font-size: 2.7em; font-weight: 700; line-height: 1.1; letter-spacing: -.01em;
+  margin: 0; max-width: 14em; color: var(--slip-ink); text-wrap: balance; overflow-wrap: anywhere;
+}
+html.slip-mode #title-block-header .subtitle { font-size: 1.02em; font-weight: 400; color: var(--slip-muted); margin-top: .7em; line-height: 1.4; max-width: 30em; }
+
+/* 横线：一束光 —— 左端最粗（4px）、颜色最深，向右逐渐收窄成一点、颜色渐隐，
+   一直延伸到屏幕右边缘。没有端点装饰，也不与其他线相交。 */
+html.slip-mode #title-block-header .quarto-title::after {
+  content: ""; display: block; height: 4px; margin: 1.6em 0 0;
+  width: calc(50vw + 50%);
+  background: linear-gradient(90deg, var(--slip-accent) 0,
+                              color-mix(in srgb, var(--slip-accent) 60%, var(--slip-paper)) 30%,
+                              color-mix(in srgb, var(--slip-accent) 22%, var(--slip-paper)) 65%,
+                              transparent 100%);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+html.slip-mode body { overflow-x: clip; }
+
+/* 署名区：每行「图标 + 文字」，与右侧大纲的「编号 + 章节名」同一节奏；
+   姓名一行稍大，其余为灰色小字。行数随信息多少变化（姓名、单位、邮箱、日期）。 */
+.slip-byline { display: none; }
+html.slip-mode #title-block-header.slip-has-byline > :is(.quarto-title-meta-author, .quarto-title-meta) { display: none !important; }
+html.slip-mode .slip-byline {
+  grid-row: 2 / span 2; grid-column: 1; align-self: start; display: grid; row-gap: .62em;
+  padding-top: calc(var(--slip-font) * 1.25); font-size: .7em; line-height: 1.35;
+}
+html.slip-mode .slip-byline .by-row { display: grid; grid-template-columns: 1.15em minmax(0, 1fr); column-gap: .85em; align-items: center; color: var(--slip-muted); }
+html.slip-mode .slip-byline .by-ico { display: grid; place-items: center; color: var(--slip-accent); }
+html.slip-mode .slip-byline .by-ico svg { width: 1.05em; height: 1.05em; }
+html.slip-mode .slip-byline .by-name { margin-bottom: .1em; }
+html.slip-mode .slip-byline .by-name .by-txt { font: 600 1.38em/1.2 var(--slip-serif); color: var(--slip-ink); letter-spacing: -.005em; }
+html.slip-mode .slip-byline .by-name .by-ico svg { width: 1.2em; height: 1.2em; }
+html.slip-mode .slip-byline .by-date .by-txt { font-variant-numeric: tabular-nums; }
+
+/* 没有被脚本接管时（例如没有作者），保留 Quarto 原有署名的简单样式 */
+html.slip-mode #title-block-header .quarto-title-meta-heading { display: none !important; }
+html.slip-mode #title-block-header :is(.quarto-title-meta-author, .quarto-title-meta) {
+  display: block !important; grid-row: 2; margin: 0 !important; padding-top: 1.5em; font-size: .78em; line-height: 1.45; color: var(--slip-muted);
+}
+html.slip-mode #title-block-header .quarto-title-meta-contents p { margin: 0; max-width: none; }
+html.slip-mode #title-block-header .abstract { grid-row: 4; font-size: .78em; margin-top: 1.4em; color: var(--slip-muted); }
+
+/* 本讲大纲：不再用竖线分隔，靠留白与对齐和署名区并列；顶端与署名区第一行对齐 */
+.slip-roadmap { font: 400 1rem/1.35 var(--slip-sans); text-align: left; }
+html.slip-mode #title-block-header > .slip-roadmap {
+  grid-column: 2; grid-row: 2 / span 2; align-self: start;
+  font-size: .62em; width: 19em; padding-top: calc(var(--slip-font) * 1.25 - .3em);
+}
+.slip-roadmap .rm-row { display: grid; grid-template-columns: 1.6em 1fr; align-items: baseline; padding: .3em 0; color: var(--slip-muted); }
+.slip-roadmap .rm-row:last-child { padding-bottom: 0; }
+.slip-roadmap .rm-n { font: 600 1.08em/1.3 var(--slip-serif); color: var(--slip-accent); }
+/* 章节多时自动分栏，保持大纲高度不超过 5 行左右：
+   6–10 章：右侧两栏；11 章以上：移到署名下方，占满整行三栏 */
+.slip-roadmap .rm-row { break-inside: avoid; }
+html.slip-mode #title-block-header > .slip-roadmap.cols-2 { width: 38em; column-count: 2; column-gap: 2.4em; }
+html.slip-mode #title-block-header > .slip-roadmap.cols-3 {
+  grid-column: 1 / -1; grid-row: 4; width: auto; margin-top: 1.8em; padding: 0;
+  column-count: 3; column-gap: 2.4em;
+}
+
+/* ───── 章节页（#） ───── */
+html.slip-mode main.content section.level1 > h1 {
+  position: relative; min-height: 100vh; margin: 0; padding: 0; border: 0;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  font-family: var(--slip-serif); font-size: 2.6em; font-weight: 700; line-height: 1.12; letter-spacing: -.01em; color: var(--slip-ink);
+}
+/* 左上小标签：PART 01 */
+html.slip-mode main.content section.level1 > h1[data-num]::before {
+  content: "Part " attr(data-num); position: relative; z-index: 1;
+  font: 700 .28em/1 var(--slip-sans); letter-spacing: .28em; text-transform: uppercase;
+  color: var(--slip-accent); margin-bottom: 1.2em;
+}
+/* 右侧：很淡的超大章节编号 */
+html.slip-mode main.content section.level1 > h1[data-num]::after {
+  content: attr(data-num); position: absolute; right: -.04em; top: 50%; transform: translateY(-52%);
+  font: 700 5.2em/1 var(--slip-serif); letter-spacing: -.04em; font-variant-numeric: lining-nums;
+  color: color-mix(in srgb, var(--slip-accent) 7%, var(--slip-paper)); z-index: 0; pointer-events: none;
+}
+html.slip-mode main.content section.level1 > h1:has(.header-section-number)::before,
+html.slip-mode main.content section.level1 > h1:has(.header-section-number)::after { content: none; }
+html.slip-mode main.content section.level1 > h1 .slip-h1 { position: relative; z-index: 1; max-width: 13em; text-wrap: balance; }
+
+/* replace：子元素叠放在同一位置 */
+html.slip-mode .replace { display: grid !important; }
+html.slip-mode .replace > * { grid-area: 1 / 1; }
+
+/* ───── 出现 / 隐藏 ───── */
+html.slip-mode .slip-unit, html.slip-mode [data-slip], html.slip-mode [data-slip-end] { transition: opacity var(--slip-fade) ease; }
+html.slip-mode .slip-hidden {
+  opacity: 0 !important; visibility: hidden !important; pointer-events: none;
+  transition: opacity .2s ease, visibility 0s linear .2s;
+}
+html.slip-mode .slip-enter { animation: slip-in var(--slip-fade) cubic-bezier(.2,.7,.3,1) both; }
+@keyframes slip-in { from { opacity: 0; transform: translateY(.35em); } to { opacity: 1; transform: none; } }
+html.slip-mode :is(.slip-enter .hl, .slip-enter.hl) { animation: slip-hl .6s .2s cubic-bezier(.4,0,.2,1) both; }
+@keyframes slip-hl { from { background-size: 0% .72em; } to { background-size: 100% .72em; } }
+html.slip-mode :is(.slip-enter .ul, .slip-enter.ul) { animation: slip-ul .6s .2s cubic-bezier(.4,0,.2,1) both; }
+@keyframes slip-ul { from { background-size: 0% .32em; } to { background-size: 100% .32em; } }
+html.slip-mode.slip-dim .slip-past { opacity: .3; }
+@media (prefers-reduced-motion: reduce) {
+  html.slip-mode .slip-enter, html.slip-mode .slip-enter :is(.hl, .ul) { animation: none; }
+}
+
+/* ───── 批注笔与激光笔 ───── */
+.slip-ink { position: absolute; left: 0; top: 0; z-index: 1400; pointer-events: none; overflow: visible; }
+.slip-ink path { fill: none; stroke: var(--slip-pen); stroke-linecap: round; stroke-linejoin: round; opacity: .9; }
+html.slip-drawing .slip-ink { pointer-events: auto; cursor: crosshair; touch-action: none; }
+.slip-laser { display: none; position: fixed; z-index: 2500; width: 16px; height: 16px; margin: -8px 0 0 -8px;
+  border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, #fff 0 18%, #ff2a2a 35%, rgba(255,42,42,.35) 60%, transparent 72%);
+  box-shadow: 0 0 14px 4px rgba(255,40,40,.45); }
+html.slip-mode .slip-laser.on { display: block; }
+
+/* ═════════════ 控件 ═════════════ */
+.slip-hud, .slip-overlay { display: none; }
+html.slip-mode .slip-hud { display: block; }
+html.slip-mode.slip-idle, html.slip-mode.slip-idle *, html.slip-mode.slip-lasering * { cursor: none !important; }
+html.slip-mode.slip-drawing.slip-idle .slip-ink { cursor: crosshair !important; }
+
+.slip-track { position: fixed; left: 0; right: 0; bottom: 0; height: 3px; z-index: 2000; background: color-mix(in srgb, var(--slip-rule) 60%, transparent); }
+.slip-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--slip-accent); transition: width .35s ease; }
+.slip-tick { position: absolute; top: 0; bottom: 0; width: 3px; margin-left: -1.5px; background: var(--slip-paper); }
+
+.slip-ctrl {
+  position: fixed; right: 1rem; bottom: .9rem; z-index: 2001;
+  display: flex; align-items: center; gap: .1rem; padding: .25rem;
+  font: 500 13px/1 var(--slip-sans); color: var(--slip-ink);
+  background: color-mix(in srgb, var(--slip-paper) 88%, transparent);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-radius: 10px; box-shadow: 0 4px 16px rgba(24,33,43,.10), inset 0 0 0 1px rgba(24,33,43,.10);
+  transition: opacity .3s ease, transform .3s ease;
+}
+html.slip-idle .slip-ctrl { opacity: 0; transform: translateY(6px); pointer-events: none; }
+.slip-ctrl button {
+  border: 0; background: transparent; color: inherit; border-radius: 7px;
+  width: 1.95rem; height: 1.95rem; display: grid; place-items: center; cursor: pointer; font: inherit;
+}
+.slip-ctrl button:hover { background: rgba(24,33,43,.07); }
+.slip-ctrl button:focus-visible { outline: 2px solid var(--slip-accent); outline-offset: -2px; }
+.slip-ctrl button.on { color: #fff; background: var(--slip-accent); }
+.slip-ctrl button.pen.on { background: var(--slip-pen); }
+.slip-ctrl svg { width: 15px; height: 15px; }
+.slip-ctrl .num { min-width: 4.4em; text-align: center; font-variant-numeric: tabular-nums; }
+.slip-ctrl .clock { font-variant-numeric: tabular-nums; color: var(--slip-muted); padding: 0 .55rem; cursor: pointer; }
+.slip-ctrl .sep { width: 1px; height: 1.1rem; background: rgba(24,33,43,.14); margin: 0 .2rem; }
+
+.slip-toast { position: fixed; left: 50%; bottom: 2.2rem; transform: translateX(-50%); z-index: 2002;
+  font: 500 15px/1.3 var(--slip-sans); padding: .55rem .6rem .55rem 1rem; border-radius: 10px;
+  background: var(--slip-ink); color: var(--slip-paper); box-shadow: 0 10px 30px rgba(24,33,43,.25);
+  display: none; align-items: center; gap: .6rem; white-space: nowrap; }
+.slip-toast.plain { padding-right: 1rem; }
+.slip-toast button { font: inherit; font-weight: 600; border: 0; border-radius: 7px; padding: .32rem .75rem; cursor: pointer;
+  background: var(--slip-accent); color: #fff; }
+.slip-toast button.ghost { background: transparent; color: inherit; opacity: .7; }
+
+html.slip-mode .slip-overlay.on { display: flex; }
+.slip-overlay { position: fixed; inset: 0; z-index: 3000; align-items: center; justify-content: center; }
+.slip-black { background: #000; cursor: none; }
+.slip-panel { background: rgba(24,33,43,.38); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+.slip-panel > div {
+  background: var(--slip-paper); color: var(--slip-ink); border-radius: 14px; padding: 1.4em 1.7em 1.5em;
+  font: clamp(15px, 1.05vw, 22px)/1.5 var(--slip-sans); box-shadow: 0 24px 70px rgba(24,33,43,.3);
+  min-width: 22em; max-width: min(44em, 92vw); max-height: 84vh; overflow: auto;
+}
+.slip-panel h4 { margin: 0 0 .8em; font: 600 1.15em/1.2 var(--slip-serif); color: var(--slip-ink); }
+.slip-keys { display: grid; grid-template-columns: auto 1fr; gap: .45em 1.4em; align-items: center; }
+.slip-keys span:nth-child(odd) { white-space: nowrap; }
+.slip-keys kbd { font: .78em var(--slip-sans); font-weight: 600; padding: .15em .45em; border-radius: 5px; margin-right: .2em;
+  background: var(--slip-paper); color: var(--slip-ink); box-shadow: inset 0 0 0 1px var(--slip-rule), 0 1px 0 var(--slip-rule); }
+.slip-keys span:nth-child(even) { color: var(--slip-muted); }
+.slip-toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; }
+.slip-toc li { padding: .3em .6em; border-radius: 7px; cursor: pointer; display: flex; gap: 1em; justify-content: space-between; }
+.slip-toc li.toc-1 { counter-increment: toc; font-weight: 650; margin-top: .55em; }
+.slip-toc li.toc-1 > span::before { content: counter(toc) "   "; white-space: pre; color: var(--slip-accent); font-family: var(--slip-serif); }
+.slip-toc li.toc-2 { padding-left: 2em; color: var(--slip-muted); }
+.slip-toc li:hover { background: var(--slip-tint); color: var(--slip-ink); }
+.slip-toc li.cur { background: var(--slip-tint); color: var(--slip-accent); }
+.slip-toc li small { font-weight: 400; color: var(--slip-faint); font-variant-numeric: tabular-nums; }
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ─────────── 可调参数 ─────────── */
+  var CFG = {
+    h1Page: true,        // 每个 # 单独一张章节页
+    titlePage: true,     // 标题块单独一页
+    roadmap: true,       // 标题页右下角显示本讲大纲
+    h2: "up",            // 每个 ## 前的默认行为："up" | "pause" | "stay" | "center" | "none"
+    runningHead: true,   // 顶部页眉显示当前章节
+    dim: false,          // 默认是否开启聚焦模式（D 键切换）
+    resume: true,        // 再次进入时提示从上次位置继续
+    autoOnF11: true,     // 按 F11 进入浏览器全屏时自动开始演示
+    topGap: 0.06,        // "up" 时距屏幕顶部的留白（屏高比例）
+    bottomGap: 0.08,     // 自动下滑时距屏幕底部的留白（屏高比例）
+    duration: 650,       // 滑动动画时长（毫秒）
+    idleHide: 2500,      // 鼠标静止多久后隐藏控件（毫秒）
+    penWidth: 0.16       // 批注笔粗细（相对字号）
+  };
+
+  var root = document.documentElement;
+  var main, markers = [], units = [], chapters = [], step = 0, active = false, viaF11 = false;
+  var ui = {}, anim = null, t0 = 0, clockTimer = null, idleTimer = null, toastTimer = null, typed = "";
+  var KEY = "slipmode:" + location.pathname;
+
+  var MODES = ["up", "center", "stay", "pause"];
+  var CONTENT = /^(H[1-6]|P|LI|IMG|FIGURE|TABLE|PRE|BLOCKQUOTE|HEADER|VIDEO|IFRAME|CANVAS|svg|DL|HR)$/;
+  var each = function (list, fn) { Array.prototype.forEach.call(list, fn); };
+  function titleOf(h) { var t = h.querySelector(".slip-h1"); return (t || h).textContent.trim(); }
+
+  /* ─────────── 解析标记 ─────────── */
+  function parseTokens(m, tokens) {
+    tokens.forEach(function (t) {
+      if (MODES.indexOf(t) >= 0) m.mode = t === "pause" ? "auto" : t;
+      else if (t.charAt(0) === "#") { m.target = t; if (m.mode === "auto") m.mode = "up"; }
+      else if (/^-?[\d.]+(px|em|rem|vh)?$/.test(t)) m.dy = t;
+    });
+  }
+  function textMarker(p) {
+    var t = p.textContent.replace(/\s+/g, " ").trim();
+    var r = t.match(/^(?:\. \. \.|\.\.\.|…)(?: (.*))?$/);
+    if (!r) return null;
+    var m = { el: p, mode: "auto", prio: 0 };
+    if (r[1]) { parseTokens(m, r[1].split(" ")); m.prio = 3; }
+    return m;
+  }
+  function divMarker(d) {
+    if (d.textContent.trim() !== "" || d.querySelector("img,svg,video,iframe,canvas")) return null;
+    var cl = d.classList, hit = d.hasAttribute("data-up");
+    MODES.forEach(function (c) { if (cl.contains(c)) hit = true; });
+    if (!hit) return null;
+    var m = { el: d, mode: "auto", prio: 0 };
+    MODES.forEach(function (c) { if (c !== "pause" && cl.contains(c)) { m.mode = c; m.prio = 3; } });
+    if (d.getAttribute("data-up")) { m.target = d.getAttribute("data-up"); m.mode = "up"; m.prio = 3; }
+    if (d.getAttribute("data-dy")) m.dy = d.getAttribute("data-dy");
+    return m;
+  }
+  function makeMarker(before, opts) {
+    var d = document.createElement("div");
+    d.className = "slip-marker slip-gen";
+    before.parentNode.insertBefore(d, before);
+    opts.el = d;
+    return opts;
+  }
+
+  /* ─────────── 扫描文档，建立步骤 ─────────── */
+  function scan() {
+    main = document.querySelector("main.content") || document.querySelector("main") || document.body;
+    var found = [];
+
+    each(main.querySelectorAll("p, div"), function (el) {
+      if (el.closest(".web-only")) return;
+      var m = el.tagName === "P" ? textMarker(el) : divMarker(el);
+      if (m) found.push(m);
+    });
+
+    // ::: incremental —— 与 revealjs 相同：列表逐条出现（不是列表时，块内元素逐个出现）
+    var incSeen = [];
+    each(main.querySelectorAll(".incremental"), function (box) {
+      if (box.closest(".web-only") || box.closest(".nonincremental")) return;
+      var items = [];
+      if (/^(UL|OL)$/.test(box.tagName)) items = box.children;
+      else {
+        var lists = box.querySelectorAll(":scope > ul, :scope > ol");
+        if (lists.length) { each(lists, function (l) { if (!l.classList.contains("incremental")) items = Array.prototype.concat.apply(Array.prototype.slice.call(items), l.children); }); }
+        else items = box.children;
+      }
+      each(items, function (it) {
+        if (incSeen.indexOf(it) >= 0 || it.classList.contains("slip-marker") || it.tagName === "SCRIPT") return;
+        incSeen.push(it);
+        found.push(makeMarker(it, { mode: "auto", prio: 1 }));
+      });
+    });
+
+    var tb = document.getElementById("title-block-header");
+    if (CFG.titlePage && tb && tb.nextElementSibling) {
+      found.push(makeMarker(tb.nextElementSibling, { mode: "up", prio: 1, gap: 0, page: true }));
+    }
+
+    chapters = [];
+    each(main.querySelectorAll("section"), function (sec) {
+      var h = sec.firstElementChild;
+      if (!h || !/^H[1-6]$/.test(h.tagName) || sec.closest(".web-only")) return;
+      var lvl = +h.tagName.charAt(1), cl = sec.classList;
+      if (lvl === 1) { wrapHeading(h); chapters.push(h); }
+      if (cl.contains("nobreak")) return;
+
+      if (lvl === 1 && CFG.h1Page) {
+        found.push(makeMarker(h, { mode: "up", target: h, gap: 0, prio: 5, page: true }));
+        if (h.nextElementSibling) found.push(makeMarker(h.nextElementSibling, { mode: "up", prio: 4 }));
+        return;
+      }
+      var mode = null;
+      ["stay", "center", "up", "pause"].forEach(function (c) { if (!mode && cl.contains(c)) mode = c; });
+      if (mode) { found.push(makeMarker(h, { mode: mode === "pause" ? "auto" : mode, prio: 3 })); return; }
+      if (lvl === 2 && CFG.h2 !== "none") {
+        found.push(makeMarker(h, { mode: CFG.h2 === "pause" ? "auto" : CFG.h2, prio: 2 }));
+      }
+    });
+
+    each(main.querySelectorAll(".replace"), function (box) {
+      var kids = Array.prototype.filter.call(box.children, function (c) { return !c.classList.contains("slip-marker"); });
+      box._kids = kids;
+      for (var i = 1; i < kids.length; i++) found.push(makeMarker(kids[i], { mode: "auto", prio: 3 }));
+    });
+
+    found.forEach(function (m) { m.el.classList.add("slip-marker"); m.el._slip = m; });
+
+    // 按文档顺序排列，合并相邻（中间没有内容）的标记，保留优先级高的
+    var ordered = [], pending = null, seen = true, all = main.querySelectorAll("*");
+    for (var ai = 0; ai < all.length; ai++) {
+      var n = all[ai];
+      if (n._slip) {
+        var m = n._slip;
+        if (pending && !seen) {
+          var keep = (m.prio >= pending.prio) ? m : pending, drop = keep === m ? pending : m;
+          if (drop.el.classList.contains("slip-gen")) drop.el.remove();
+          drop.el._slip = null;
+          ordered[ordered.length - 1] = keep;
+          pending = keep;
+        } else { ordered.push(m); pending = m; }
+        seen = false;
+      } else if ((CONTENT.test(n.tagName) || n.classList.contains("callout")) && !n.closest(".slip-marker")) {
+        if (n.closest("#title-block-header") && n.id !== "title-block-header") continue;
+        seen = true;
+      }
+    }
+    while (ordered.length && !hasContentBefore(ordered[0].el)) ordered.shift();
+    markers = ordered;
+
+    markers.forEach(function (m, i) {
+      for (var node = m.el; node && node !== main; node = node.parentElement) {
+        for (var s = node.nextElementSibling; s; s = s.nextElementSibling) {
+          if (!s.classList.contains("slip-marker")) s.setAttribute("data-slip", i + 1);
+        }
+      }
+    });
+    each(main.querySelectorAll(".replace"), function (box) {
+      var kids = box._kids || [];
+      for (var i = 0; i < kids.length - 1; i++) {
+        var nx = kids[i + 1].getAttribute("data-slip");
+        if (nx) kids[i].setAttribute("data-slip-end", nx);
+      }
+    });
+
+    // 路线图
+    if (CFG.roadmap && chapters.length > 1) {
+      if (tb && CFG.titlePage) tb.appendChild(roadmap());
+    }
+    if (tb && CFG.titlePage) byline(tb);
+    if (CFG.h1Page) {
+      chapters.forEach(function (h, i) { h.setAttribute("data-num", ("0" + (i + 1)).slice(-2)); });
+    }
+
+    // 「单元」：不含标记的最大块，用于入场动画和聚焦模式
+    units = [];
+    (function collect(box) {
+      each(box.children, function (c) {
+        if (c.classList.contains("slip-marker")) return;
+        if (c.classList.contains("replace")) { each(c.children, function (k) { if (!k.classList.contains("slip-marker")) units.push(k); }); return; }
+        if (c.querySelector(".slip-marker")) { collect(c); return; }
+        units.push(c);
+      });
+    })(main);
+    units.forEach(function (u) {
+      u.classList.add("slip-unit");
+      var a = u.closest("[data-slip]");
+      u._step = a ? +a.getAttribute("data-slip") : 0;
+      u._end = u.hasAttribute("data-slip-end") ? +u.getAttribute("data-slip-end") : Infinity;
+      u._keep = /^H[1-6]$/.test(u.tagName) || u.id === "title-block-header";
+    });
+  }
+
+  /* 署名区图标：细线条，与控件栏图标同一风格 */
+  var BS = 'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"';
+  var BYICON = {
+    person:   '<svg viewBox="0 0 16 16"><circle cx="8" cy="5.2" r="2.7" ' + BS + '/><path d="M2.8 14c.6-2.9 2.7-4.4 5.2-4.4s4.6 1.5 5.2 4.4" ' + BS + '/></svg>',
+    building: '<svg viewBox="0 0 16 16"><path d="M2 14h12M3 14V6.2L8 3l5 3.2V14M5.5 8v3.5M8 8v3.5M10.5 8v3.5" ' + BS + '/></svg>',
+    mail:     '<svg viewBox="0 0 16 16"><rect x="2" y="3.5" width="12" height="9" rx="1.5" ' + BS + '/><path d="M2.5 4.5 8 8.8l5.5-4.3" ' + BS + '/></svg>',
+    calendar: '<svg viewBox="0 0 16 16"><rect x="2.2" y="3.2" width="11.6" height="10.6" rx="1.5" ' + BS + '/><path d="M2.2 6.6h11.6M5.3 1.8v2.6M10.7 1.8v2.6" ' + BS + '/></svg>'
+  };
+
+  /* 署名区：从 Quarto 生成的作者、单位、邮箱、日期中取文字，重新组合 */
+  function byline(tb) {
+    var txt = function (el) { return el ? el.textContent.replace(/\s+/g, " ").trim() : ""; };
+    var names = Array.prototype.map.call(tb.querySelectorAll("p.author"), txt);
+    if (!names.length) {
+      each(tb.querySelectorAll(".quarto-title-meta > div"), function (d) {
+        if (!d.querySelector(".date") && /author/i.test(txt(d.querySelector(".quarto-title-meta-heading"))))
+          each(d.querySelectorAll(".quarto-title-meta-contents p"), function (p) { if (txt(p)) names.push(txt(p)); });
+      });
+    }
+    names = names.filter(Boolean);
+    if (!names.length) return;
+    var affs = [];
+    each(tb.querySelectorAll("p.affiliation"), function (p) { var t = txt(p); if (t && affs.indexOf(t) < 0) affs.push(t); });
+    var date = txt(tb.querySelector("p.date"));
+
+    var emails = [];
+    each(tb.querySelectorAll('a[href^="mailto:"]'), function (a) {
+      var e = a.getAttribute("href").replace(/^mailto:/, ""); if (e && emails.indexOf(e) < 0) emails.push(e);
+    });
+
+    var dl = document.createElement("div"); dl.className = "slip-byline";
+    function row(icon, value, cls) {
+      var r = document.createElement("div"); r.className = "by-row " + cls;
+      var i = document.createElement("span"); i.className = "by-ico"; i.innerHTML = BYICON[icon]; i.setAttribute("aria-hidden", "true");
+      var t = document.createElement("span"); t.className = "by-txt"; t.textContent = value;
+      r.append(i, t); dl.appendChild(r);
+    }
+    row("person", names.join(", "), "by-name");
+    if (affs.length) row("building", affs.join("; "), "by-aff");
+    if (emails.length) row("mail", emails.join(", "), "by-mail");
+    if (date) row("calendar", date, "by-date");
+    tb.appendChild(dl);
+    tb.classList.add("slip-has-byline");
+  }
+
+  function roadmap() {
+    var box = document.createElement("nav");
+    var n = chapters.length;
+    box.className = "slip-roadmap" + (n > 10 ? " cols-3" : n > 5 ? " cols-2" : "");
+    box.setAttribute("aria-label", "Outline");
+    chapters.forEach(function (h, i) {
+      var row = document.createElement("div"), n = document.createElement("span"), t = document.createElement("span");
+      row.className = "rm-row"; n.className = "rm-n"; n.textContent = i + 1; t.textContent = titleOf(h);
+      row.append(n, t); box.appendChild(row);
+    });
+    return box;
+  }
+
+
+  function hasContentBefore(el) {
+    var r = document.createRange();
+    r.setStart(main, 0); r.setEndBefore(el);
+    var frag = r.cloneContents();
+    return frag.textContent.trim() !== "" || !!frag.querySelector("img,svg,figure,header");
+  }
+
+  function wrapHeading(h) {
+    if (h.querySelector(":scope > .slip-h1")) return;
+    var span = document.createElement("span");
+    span.className = "slip-h1";
+    Array.prototype.slice.call(h.childNodes).forEach(function (c) {
+      if (c.nodeType === 1 && c.classList.contains("anchorjs-link")) return;
+      span.appendChild(c);
+    });
+    h.insertBefore(span, h.firstChild);
+  }
+
+  /* ─────────── 显示状态 ─────────── */
+  function stepOf(el) { var a = el.closest("[data-slip]"); return a ? +a.getAttribute("data-slip") : 0; }
+
+  function paint(prev) {
+    each(main.querySelectorAll("[data-slip], [data-slip-end]"), function (e) {
+      var a = e.getAttribute("data-slip"), b = e.getAttribute("data-slip-end");
+      e.classList.toggle("slip-hidden", (a !== null && +a > step) || (b !== null && step >= +b));
+    });
+    units.forEach(function (u) {
+      var entering = prev != null && u._step === step && step > prev;
+      u.classList.remove("slip-enter");
+      if (entering) { void u.offsetWidth; u.classList.add("slip-enter"); }
+      u.classList.toggle("slip-past", !u._keep && u._step < step && step < u._end);
+    });
+    var n = markers.length;
+    ui.bar.style.width = (n ? step / n * 100 : 100) + "%";
+    ui.num.textContent = (step + 1) + " / " + (n + 1);
+    var ch = currentHeading(false);
+    ui.headText.textContent = ch ? titleOf(ch) : "";
+    ui.headNum.textContent = ch && chapters.length > 1 ? chapters.indexOf(ch) + 1 : "";
+    var m = markers[step - 1];
+    ui.head.classList.toggle("off", !CFG.runningHead || !ch || step === 0 || !!(m && m.page));
+    try { localStorage.setItem(KEY, String(step)); } catch (e) {}
+  }
+
+  function currentHeading(withH2) {
+    var cur = null;
+    each(main.querySelectorAll(withH2 ? "section > h1, section > h2" : "section > h1"), function (h) { if (stepOf(h) <= step) cur = h; });
+    return cur;
+  }
+
+  /* ─────────── 滚动位置 ─────────── */
+  function absTop(el) { return el.getBoundingClientRect().top + window.scrollY; }
+  function len(str) {
+    if (!str) return 0;
+    var m = String(str).match(/^(-?[\d.]+)\s*(px|em|rem|vh)?$/);
+    if (!m) return 0;
+    var v = parseFloat(m[1]), u = m[2] || "em";
+    if (u === "px") return v;
+    if (u === "vh") return v * window.innerHeight / 100;
+    if (u === "rem") return v * parseFloat(getComputedStyle(root).fontSize);
+    return v * parseFloat(getComputedStyle(main).fontSize);
+  }
+  function region(k) {
+    var top = Infinity, bottom = -Infinity, first = null;
+    each(main.querySelectorAll('[data-slip="' + k + '"]'), function (e) {
+      var r = e.getBoundingClientRect();
+      if (!r.height && !r.width) return;
+      if (!first) first = e;
+      top = Math.min(top, r.top + window.scrollY);
+      bottom = Math.max(bottom, r.bottom + window.scrollY);
+    });
+    if (!first) top = bottom = absTop(markers[k - 1].el);
+    if (k < markers.length) bottom = Math.min(bottom, absTop(markers[k].el));
+    return { top: top, bottom: Math.max(top, bottom) };
+  }
+  function positions(upto) {
+    var vh = window.innerHeight, maxY = Math.max(0, root.scrollHeight - vh), p = 0, pos = [0];
+    var limit = vh * (1 - CFG.bottomGap);
+    for (var k = 1; k <= upto; k++) {
+      var m = markers[k - 1], reg = region(k), dy = len(m.dy);
+      var gap = (m.gap != null ? m.gap : CFG.topGap) * vh, t = null;
+      if (m.mode === "up") {
+        t = m.target;
+        if (typeof t === "string") { try { t = document.querySelector(t); } catch (e) { t = null; } }
+        p = (t ? absTop(t) : reg.top) - gap + dy;
+        // 指定元素放在顶部后若新内容放不下，优先保证新内容完整可见
+        if (t && reg.bottom > p + limit) p = Math.min(reg.bottom - limit, reg.top - gap);
+      } else if (m.mode === "center") {
+        p = (reg.top + reg.bottom) / 2 - vh / 2 + dy;
+      } else if (m.mode === "auto") {
+        if (reg.bottom > p + limit) p = Math.max(p, Math.min(reg.bottom - limit, reg.top - gap)) + dy;
+      }
+      if (m.mode !== "stay" && m.gap == null) p = tidy(p, k, m.mode, reg, t ? absTop(t) : reg.top, gap, limit);
+      p = Math.min(Math.max(0, p), maxY);
+      pos.push(p);
+    }
+    return pos;
+  }
+
+  /* 避免屏幕上缘把某个块切成一小条：
+     · 能把整块露出来（且新内容仍完整可见）就往回让一点，顺便把屏幕填满；
+     · 否则把它整块推出屏幕；
+     · 很高的块（大图）被切掉大半属于正常滚动，不处理。 */
+  function tidy(p, k, mode, reg, keepTop, gap, limit) {
+    var vh = window.innerHeight, cut = null;
+    for (var i = 0; i < units.length; i++) {
+      var u = units[i];
+      if (u._step > k || k >= u._end) continue;
+      var r = u.getBoundingClientRect();
+      if (!r.height || r.height > vh * 0.9) continue;
+      var top = r.top + window.scrollY, bottom = r.bottom + window.scrollY;
+      if (top < p - 1 && bottom > p + 1 && (!cut || top < cut.top)) cut = { top: top, bottom: bottom, h: r.height };
+    }
+    if (!cut) return p;
+    var up = cut.top - gap;
+    // 往上让出的空隙里不能再露出前一块的尾巴
+    for (var j = 0; j < units.length; j++) {
+      var v = units[j];
+      if (v._step > k || k >= v._end) continue;
+      var q = v.getBoundingClientRect(), qb = q.bottom + window.scrollY, qt = q.top + window.scrollY;
+      if (q.height && qt < up && qb > up && qb <= cut.top) up = qb;
+    }
+    if (mode !== "up" && reg.bottom - up <= limit) return up;           // 整块露出
+    var down = cut.bottom;
+    if (cut.h > vh * 0.6 && (cut.bottom - p) / cut.h > 0.4) return p;  // 大图正常滚动
+    if (down <= keepTop + 1) return down;                              // 整块推出
+    return p;
+  }
+
+  function scrollToY(y, smooth) {
+    if (anim) cancelAnimationFrame(anim);
+    var from = window.scrollY, d = y - from;
+    if (!smooth || Math.abs(d) < 2) { window.scrollTo(0, y); return; }
+    var dur = Math.min(CFG.duration * 1.4, CFG.duration * (0.7 + Math.abs(d) / window.innerHeight * 0.3));
+    var s = performance.now();
+    (function tick(t) {
+      var x = Math.min(1, (t - s) / dur);
+      var e = x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+      window.scrollTo(0, from + d * e);
+      anim = x < 1 ? requestAnimationFrame(tick) : null;
+    })(s);
+  }
+
+  function go(k, smooth) {
+    var prev = step;
+    k = Math.max(0, Math.min(markers.length, k));
+    var y = positions(k)[k];            // 先测量，再改变显示
+    step = k;
+    paint(smooth === false ? null : prev);
+    scrollToY(y, smooth !== false);
+  }
+
+  /* ─────────── 进入 / 退出 ─────────── */
+  function enter() {
+    if (active) return;
+    var start = 0, view = window.scrollY + window.innerHeight * 0.5;
+    if (window.scrollY > 50) {
+      for (var i = 0; i < markers.length; i++) { if (absTop(markers[i].el) <= view) start = i + 1; else break; }
+    }
+    var saved = null;
+    try { saved = +localStorage.getItem(KEY); } catch (e) {}
+    active = true;
+    root.classList.add("slip-mode");
+    root.classList.toggle("slip-dim", CFG.dim);
+    ui.dimBtn.classList.toggle("on", CFG.dim);
+    t0 = Date.now(); tickClock(); clockTimer = setInterval(tickClock, 1000);
+    wake();
+    requestAnimationFrame(function () {
+      placeTicks();
+      go(start, false);
+      if (CFG.resume && start === 0 && saved > 0 && saved <= markers.length) {
+        toast("Continue from step " + (saved + 1) + "?", [["Continue", function () { go(saved); }], ["Start over", null]], 8000);
+      }
+    });
+  }
+
+  function exit() {
+    if (!active) return;
+    var anchor = main.querySelector('[data-slip="' + step + '"]');
+    active = false; viaF11 = false;
+    clearInterval(clockTimer);
+    setDraw(false); setLaser(false);
+    root.classList.remove("slip-mode", "slip-idle", "slip-dim");
+    [ui.black, ui.help, ui.toc].forEach(function (o) { o.classList.remove("on"); });
+    ui.toast.style.display = "none";
+    each(main.querySelectorAll(".slip-hidden, .slip-enter, .slip-past"), function (e) { e.classList.remove("slip-hidden", "slip-enter", "slip-past"); });
+    if (anchor) requestAnimationFrame(function () { anchor.scrollIntoView({ block: "center" }); });
+  }
+
+  function fsEl() { return document.fullscreenElement || document.webkitFullscreenElement || null; }
+  function toggle() {
+    if (fsEl()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+    if (active) { exit(); return; }
+    var req = root.requestFullscreen || root.webkitRequestFullscreen;
+    if (!req) { enter(); return; }
+    var r;
+    try { r = req.call(root); } catch (e) { enter(); return; }
+    if (r && r.then) r.catch(function () { enter(); });
+  }
+  ["fullscreenchange", "webkitfullscreenchange"].forEach(function (ev) {
+    document.addEventListener(ev, function () { if (fsEl()) enter(); else exit(); });
+  });
+
+  var rt;
+  window.addEventListener("resize", function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () {
+      if (CFG.autoOnF11 && !fsEl()) {
+        var full = Math.abs(window.innerHeight - screen.height) <= 2 && Math.abs(window.innerWidth - screen.width) <= 2;
+        if (full && !active) { viaF11 = true; enter(); return; }
+        if (!full && active && viaF11) { exit(); return; }
+      }
+      if (active) { placeTicks(); go(step, false); }
+    }, 150);
+  });
+  window.addEventListener("load", function () { if (active) go(step, false); });
+
+  function placeTicks() {
+    each(ui.track.querySelectorAll(".slip-tick"), function (t) { t.remove(); });
+    var n = markers.length;
+    if (!n) return;
+    chapters.forEach(function (h) {
+      var s = stepOf(h);
+      if (s <= 0 || s >= n) return;
+      var t = document.createElement("i"); t.className = "slip-tick"; t.style.left = (s / n * 100) + "%";
+      ui.track.appendChild(t);
+    });
+  }
+
+  /* ─────────── 小工具 ─────────── */
+  function tickClock() {
+    var s = Math.floor((Date.now() - t0) / 1000);
+    ui.clock.textContent = Math.floor(s / 60) + ":" + ("0" + s % 60).slice(-2);
+  }
+  function wake() {
+    root.classList.remove("slip-idle");
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function () { if (active) root.classList.add("slip-idle"); }, CFG.idleHide);
+  }
+  document.addEventListener("mousemove", function (e) {
+    if (!active) return;
+    wake();
+    if (ui.laser.classList.contains("on")) { ui.laser.style.left = e.clientX + "px"; ui.laser.style.top = e.clientY + "px"; }
+  });
+
+  function toast(msg, actions, ms) {
+    var t = ui.toast;
+    t.innerHTML = "";
+    t.classList.toggle("plain", !actions);
+    var span = document.createElement("span"); span.textContent = msg; t.appendChild(span);
+    (actions || []).forEach(function (a, i) {
+      var b = document.createElement("button"); b.type = "button"; b.textContent = a[0];
+      if (i > 0) b.className = "ghost";
+      b.addEventListener("click", function () { t.style.display = "none"; if (a[1]) a[1](); });
+      t.appendChild(b);
+    });
+    t.style.display = "flex";
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.style.display = "none"; }, ms || 1400);
+  }
+
+  function setDim(on) {
+    root.classList.toggle("slip-dim", on); ui.dimBtn.classList.toggle("on", on);
+    toast(on ? "Focus mode on" : "Focus mode off");
+  }
+  function setLaser(on) {
+    if (on) setDraw(false);
+    ui.laser.classList.toggle("on", on); root.classList.toggle("slip-lasering", on); ui.laserBtn.classList.toggle("on", on);
+  }
+
+  /* 批注笔：SVG 覆盖整页，笔迹随内容滚动 */
+  var strokes = [], cur = null;
+  function setDraw(on) {
+    if (on) { setLaser(false); sizeInk(); }
+    root.classList.toggle("slip-drawing", on); ui.penBtn.classList.toggle("on", on);
+    if (on) toast("Pen on. Z undoes a stroke, C clears all.", null, 2400);
+  }
+  function sizeInk() {
+    ui.ink.setAttribute("width", root.scrollWidth);
+    ui.ink.setAttribute("height", root.scrollHeight);
+  }
+  function inkPoint(e) { return (e.pageX).toFixed(1) + " " + (e.pageY).toFixed(1); }
+  function clearInk() { strokes.forEach(function (p) { p.remove(); }); strokes = []; }
+
+  function openToc() {
+    var list = ui.toc.querySelector("ol");
+    list.innerHTML = "";
+    var curH = currentHeading(true);
+    each(main.querySelectorAll("section > h1, section > h2"), function (h) {
+      var s = stepOf(h), li = document.createElement("li");
+      li.className = "toc-" + h.tagName.charAt(1) + (curH === h ? " cur" : "");
+      var name = document.createElement("span"); name.textContent = titleOf(h);
+      var num = document.createElement("small"); num.textContent = s + 1;
+      li.append(name, num);
+      li.addEventListener("click", function (e) { e.stopPropagation(); ui.toc.classList.remove("on"); go(s); });
+      list.appendChild(li);
+    });
+    ui.toc.classList.add("on");
+  }
+
+  /* ─────────── 键盘 ─────────── */
+  document.addEventListener("keydown", function (e) {
+    var t = e.target;
+    if (t && t.closest && t.closest("input, textarea, select, [contenteditable]")) return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (document.querySelector(".glightbox-container")) return;
+
+    var k = e.key;
+    if ((k === "f" || k === "F") && !typed) { e.preventDefault(); toggle(); return; }
+    if (!active) return;
+
+    if (ui.black.classList.contains("on")) { e.preventDefault(); ui.black.classList.remove("on"); return; }
+    var open = [ui.help, ui.toc].filter(function (o) { return o.classList.contains("on"); });
+    if (open.length) { e.preventDefault(); open.forEach(function (o) { o.classList.remove("on"); }); return; }
+
+    if (/^[0-9]$/.test(k)) { typed += k; toast("Go to step " + typed + ", then press Enter", null, 4000); e.preventDefault(); return; }
+    if (typed && k === "Enter") { e.preventDefault(); var n = +typed; typed = ""; ui.toast.style.display = "none"; go(n - 1); return; }
+    if (typed && (k === "Escape" || k === "Backspace")) { e.preventDefault(); typed = ""; ui.toast.style.display = "none"; return; }
+
+    switch (k) {
+      case "ArrowRight": case "ArrowDown": case "PageDown": case "Enter": case "n":
+        e.preventDefault(); go(step + 1); break;
+      case " ": e.preventDefault(); go(e.shiftKey ? step - 1 : step + 1); break;
+      case "ArrowLeft": case "ArrowUp": case "PageUp": case "Backspace": case "p":
+        e.preventDefault(); go(step - 1); break;
+      case "Home": e.preventDefault(); go(0); break;
+      case "End": e.preventDefault(); go(markers.length); break;
+      case "o": case "O": case "g": case "G": e.preventDefault(); openToc(); break;
+      case "d": case "D": e.preventDefault(); setDim(!root.classList.contains("slip-dim")); break;
+      case "l": case "L": e.preventDefault(); setLaser(!ui.laser.classList.contains("on")); break;
+      case "w": case "W": e.preventDefault(); setDraw(!root.classList.contains("slip-drawing")); break;
+      case "z": case "Z": e.preventDefault(); var p = strokes.pop(); if (p) p.remove(); break;
+      case "c": case "C": e.preventDefault(); if (strokes.length) { clearInk(); toast("Ink cleared"); } break;
+      case "b": case "B": case ".": e.preventDefault(); ui.black.classList.add("on"); break;
+      case "?": case "h": case "H": e.preventDefault(); ui.help.classList.add("on"); break;
+      case "Escape":
+        if (root.classList.contains("slip-drawing")) { e.preventDefault(); setDraw(false); break; }
+        if (!fsEl()) { e.preventDefault(); exit(); } break;
+    }
+  }, true);
+
+  var ty = null;
+  document.addEventListener("touchstart", function (e) { if (active && !root.classList.contains("slip-drawing")) ty = e.touches[0].clientY; }, { passive: true });
+  document.addEventListener("touchend", function (e) {
+    if (!active || ty === null) return;
+    var d = ty - e.changedTouches[0].clientY; ty = null;
+    if (Math.abs(d) > 50) go(step + (d > 0 ? 1 : -1));
+  }, { passive: true });
+
+  /* ─────────── 界面 ─────────── */
+  var S = 'fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"';
+  var ICON = {
+    play: '<svg viewBox="0 0 10 12"><path d="M0 0v12l10-6z" fill="currentColor"/></svg>',
+    up: '<svg viewBox="0 0 16 16"><path d="M3.5 10l4.5-4.5 4.5 4.5" ' + S + '/></svg>',
+    down: '<svg viewBox="0 0 16 16"><path d="M3.5 6l4.5 4.5 4.5-4.5" ' + S + '/></svg>',
+    toc: '<svg viewBox="0 0 16 16"><path d="M5.5 4h8M5.5 8h8M5.5 12h8M2.5 4h.01M2.5 8h.01M2.5 12h.01" ' + S + '/></svg>',
+    pen: '<svg viewBox="0 0 16 16"><path d="M10.5 2.5l3 3L6 13l-3.5.5L3 10z M9 4l3 3" ' + S + '/></svg>',
+    laser: '<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="2" fill="currentColor"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2" ' + S + '/></svg>',
+    dim: '<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5" ' + S + '/><path d="M8 2.5a5.5 5.5 0 0 1 0 11z" fill="currentColor"/></svg>',
+    help: '<svg viewBox="0 0 16 16"><path d="M6 6a2 2 0 1 1 3 1.7c-.6.4-1 .8-1 1.5V10M8 12.5v.01" ' + S + '/></svg>',
+    close: '<svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" ' + S + '/></svg>'
+  };
+  function el(tag, cls, html) { var x = document.createElement(tag); if (cls) x.className = cls; if (html) x.innerHTML = html; return x; }
+  function btn(icon, title, fn) {
+    var b = el("button", icon, ICON[icon]); b.type = "button"; b.title = title; b.setAttribute("aria-label", title);
+    b.addEventListener("click", fn); return b;
+  }
+  function overlay(cls, inner) {
+    var o = el("div", "slip-overlay " + cls);
+    o.appendChild(inner);
+    o.addEventListener("click", function () { o.classList.remove("on"); });
+    document.body.appendChild(o);
+    return o;
+  }
+  function keysPanel() {
+    var rows = [
+      [["→", "↓", "Space"], "Next step"], [["←", "↑"], "Previous step"],
+      [["Home", "End"], "First / last step"], [["12", "Enter"], "Jump to step 12"],
+      [["O"], "Contents, jump to a section"], [["W"], "Pen, draw on the page"],
+      [["Z", "C"], "Undo stroke / clear ink"], [["L"], "Laser pointer"],
+      [["D"], "Focus mode, fade what was covered"], [["B"], "Black screen"],
+      [["Esc"], "Exit presentation"]
+    ];
+    var box = el("div"), h = el("h4"); h.textContent = "Keyboard shortcuts"; box.appendChild(h);
+    var grid = el("div", "slip-keys");
+    rows.forEach(function (r) {
+      var a = el("span"), b = el("span");
+      r[0].forEach(function (k) { var kb = el("kbd"); kb.textContent = k; a.appendChild(kb); });
+      b.textContent = r[1];
+      grid.append(a, b);
+    });
+    box.appendChild(grid);
+    return box;
+  }
+
+  function init() {
+    scan();
+
+    var play = el("button", "slip-play", ICON.play);
+    play.type = "button"; play.title = "Start presentation"; play.setAttribute("aria-label", "Start presentation");
+    play.addEventListener("click", toggle);
+    document.body.appendChild(play);
+
+    ui.head = el("div", "slip-head off");
+    ui.headNum = el("b"); ui.headText = el("span");
+    ui.head.append(ui.headNum, ui.headText);
+    document.body.appendChild(ui.head);
+
+    var hud = el("div", "slip-hud");
+    ui.track = el("div", "slip-track");
+    ui.bar = el("div", "slip-bar");
+    ui.track.appendChild(ui.bar);
+    var ctrl = el("div", "slip-ctrl");
+    ui.clock = el("span", "clock"); ui.clock.title = "Elapsed time, click to reset";
+    ui.clock.addEventListener("click", function () { t0 = Date.now(); tickClock(); });
+    ui.num = el("span", "num");
+    ui.penBtn = btn("pen", "Pen (W)", function () { setDraw(!root.classList.contains("slip-drawing")); });
+    ui.laserBtn = btn("laser", "Laser pointer (L)", function () { setLaser(!ui.laser.classList.contains("on")); });
+    ui.dimBtn = btn("dim", "Focus mode (D)", function () { setDim(!root.classList.contains("slip-dim")); });
+    ctrl.append(ui.clock, el("span", "sep"),
+      btn("up", "Previous (←)", function () { go(step - 1); }), ui.num,
+      btn("down", "Next (→)", function () { go(step + 1); }), el("span", "sep"),
+      btn("toc", "Contents (O)", openToc), ui.penBtn, ui.laserBtn, ui.dimBtn,
+      btn("help", "Shortcuts (?)", function () { ui.help.classList.add("on"); }),
+      btn("close", "Exit (Esc)", toggle));
+    ui.toast = el("div", "slip-toast");
+    hud.append(ui.track, ctrl, ui.toast);
+    document.body.appendChild(hud);
+
+    // 批注层
+    ui.ink = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    ui.ink.setAttribute("class", "slip-ink");
+    document.body.appendChild(ui.ink);
+    ui.ink.addEventListener("pointerdown", function (e) {
+      if (!root.classList.contains("slip-drawing")) return;
+      e.preventDefault();
+      ui.ink.setPointerCapture(e.pointerId);
+      cur = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      cur.setAttribute("stroke-width", (len("1em") * CFG.penWidth).toFixed(1));
+      cur._d = "M" + inkPoint(e) + " L" + inkPoint(e);
+      cur.setAttribute("d", cur._d);
+      ui.ink.appendChild(cur); strokes.push(cur);
+    });
+    ui.ink.addEventListener("pointermove", function (e) {
+      if (!cur) return;
+      cur._d += " L" + inkPoint(e);
+      cur.setAttribute("d", cur._d);
+    });
+    ["pointerup", "pointercancel"].forEach(function (ev) { ui.ink.addEventListener(ev, function () { cur = null; }); });
+
+    ui.laser = el("div", "slip-laser");
+    document.body.appendChild(ui.laser);
+    ui.black = overlay("slip-black", el("div"));
+    var tocBox = el("div"), tocH = el("h4"); tocH.textContent = "Contents";
+    tocBox.append(tocH, el("ol"));
+    ui.toc = overlay("slip-panel slip-toc", tocBox);
+    ui.help = overlay("slip-panel slip-help", keysPanel());
+
+    window.slipmode = { go: go, enter: enter, exit: exit,
+      get step() { return step; }, get total() { return markers.length; }, markers: function () { return markers; } };
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>

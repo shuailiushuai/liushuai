@@ -85,9 +85,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
+      searchColumns: ["listing-date","listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -196,7 +196,7 @@ window.Quarto = {
     </span>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../about.pdf"> 
 <span class="menu-text">个人简介</span></a>
   </li>  
 </ul>
@@ -235,35 +235,45 @@ window.Quarto = {
 
 <section id="macroeconomics" class="level2">
 <h2 class="anchored" data-anchor-id="macroeconomics">Macroeconomics</h2>
-<div id="listing-macroeconomics" class="quarto-listing quarto-listing-container-grid">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1789457220000" data-listing-file-modified-sort="1789457220754" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="51">
-<a href="../teaching/macroeconomics/chapter1.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Chapter 1
-</h5>
-<div class="card-text listing-description delink">
-<p>The Subject Matter</p>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1789459197000" data-listing-file-modified-sort="1789459197322" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../teaching/macroeconomics/chapter2.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left borderless">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-chapter2
-</h5>
-<div class="card-text listing-description delink">
-<p>Public mortality data in Norway</p>
-</div>
-</div>
-</div></a>
-</div>
-</div>
+<div id="listing-macroeconomics" class="quarto-listing quarto-listing-container-table">
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+
+<th>
+Title
+</th>
+
+<th>
+Description
+</th>
+
+</tr>
+</thead>
+<tbody class="list">
+
+<tr data-index="0" data-listing-date-sort="1789457220000" data-listing-file-modified-sort="1789457220754" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="51" data-listing-title-sort="Chapter 1" data-listing-filename-sort="chapter1.qmd">
+<td>
+<a href="../teaching/macroeconomics/chapter1.html" class="title listing-title">Chapter 1</a>
+</td>
+<td>
+<span class="listing-description">The Subject Matter</span>
+</td>
+
+</tr>
+
+<tr data-index="1" data-listing-date-sort="1789459670000" data-listing-file-modified-sort="1789459670029" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Chapter2" data-listing-filename-sort="chapter2.qmd">
+<td>
+<a href="../teaching/macroeconomics/chapter2.html" class="title listing-title">Chapter2</a>
+</td>
+<td>
+<span class="listing-description">Public mortality data in Norway</span>
+</td>
+
+</tr>
+
+</tbody>
+</table>
 <div class="listing-no-matching d-none">No matching items</div>
 </div>
 </section>
